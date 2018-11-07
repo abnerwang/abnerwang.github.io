@@ -1,0 +1,31 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Vim 中 indentLine 插件修改对齐字符 · Qiyexuxu</title><meta name="description" content="Vim 中 indentLine 插件修改对齐字符 - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Vim 中 indentLine 插件修改对齐字符</h1><div class="tags"><a href="/tags/Vim/" class="tag-title">#Vim</a></div><div class="post-info">Aug 28, 2016</div><div class="post-content"><p>完整的 Vim 配置教程请参阅我的博文：<a href="http://blog.qiyexuxu.com/2016/08/23/2016-08-23-vim-conf/" target="_blank" rel="noopener">Vim 开发环境配置</a>，下面是这篇博文的补充内容。</p>
+<hr>
+<p>正如 indentLine 的 <a href="https://github.com/Yggdroot/indentLine" target="_blank" rel="noopener">GitHub 主页</a> 上说的那样子，要自定义对齐字符，首先要下载安装 <a href="http://fontforge.github.io/en-US/" target="_blank" rel="noopener">FontForge</a>，Mac 下在安装之前需要首先安装 <a href="https://www.xquartz.org/" target="_blank" rel="noopener">XQuartz</a>，这两个软件都安装完成之后，按照官方所说的步骤操作如下：（将 Vim 原来使用的那个字体卸载掉，譬如我原来用的是 Monaco for Powerline，然后在网上重新把这个字体下载下来，经过下列操作后再重新安装新生成的字体）</p>
+<a id="more"></a>
+<blockquote>
+<ol>
+<li>Download and install FontForge.</li>
+<li>Locate and open your terminal/gVim font.</li>
+<li>Open the font in FontForge, choose <strong>Goto</strong> from the <strong>View</strong> menu and select <em>Private Use Area</em> from the drop down box.</li>
+<li>In the private use area, locate a blank spot for the glyph. Make a note of the code, e.g. <code>U+E0A3</code>.</li>
+<li>Double-click the selected code point to open the font drawing tool.</li>
+<li>From the <strong>File</strong> menu, select <strong>Import…</strong> and locate the <em>indentLine-dotted-guide.eps</em> file.</li>
+<li>Once imported, choose <strong>File</strong> -&gt; <strong>Generate Fonts</strong> and choose a location and file type for the new font.</li>
+</ol>
+</blockquote>
+<p>在以上步骤中，可能会出现警告让你在 FontForge 的菜单栏中依次点击 <code>Element -&gt; Font Info... -&gt; General</code> 来修改 <code>Em Size</code> 的值为 <code>1000</code>，按它说的做。</p>
+<p>在以上步骤中，生成字体的时候，选择以下字体类型：</p>
+<p><img src="http://wx3.sinaimg.cn/mw690/79225320gy1fel4mcvqwhj20lc0xp4oa.jpg" alt="生成的字体类型"></p>
+<p>找到新生成的字体并将其安装到系统中，修改 .vimrc 文件，将字体设置成刚才安装的新字体。用 FontForge 打开新生成的字体，找到你在步骤 6 中 import 的符号，右击，然后依次选择 <code>Glyph Info... -&gt; Unicode</code>，复制下面红色方框的内容：</p>
+<p><img src="http://wx2.sinaimg.cn/mw690/79225320gy1fel4obb6q8j20rq0min2v.jpg" alt="复制该内容"></p>
+<p>在 .vimrc 文件中，删除原来语句  <code>let g:indentLine_char = &#39;&#39;</code>  中单引号的内容（如果没有这条语句的话请新建它），将以上复制好的红色方框中的内容粘贴到单引号内，保存，重启 Vim，其缩进符号就可以得到下面这种使用 Patched font 的效果：</p>
+<p><img src="http://wx2.sinaimg.cn/mw690/79225320gy1fel4qejk5sj20sg0ibwnv.jpg" alt="From https://github.com/Yggdroot/indentLine"></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/08/28/2016/08-28-python-notes7/" class="prev">PREV</a><a href="/2016/08/26/2016/08-26-Python-notes6/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+var disqus_identifier = '2016/08/28/2016/08-28-vim-indentline/';
+var disqus_title = 'Vim 中 indentLine 插件修改对齐字符';
+var disqus_url = 'http://blog.keeplearning.group/2016/08/28/2016/08-28-vim-indentline/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//abnerwang.disqus.com/count.js" async></script><div class="copyright"><p>© 2014 - 2018 <a href="http://blog.keeplearning.group">David Wang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

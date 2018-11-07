@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 由递归思想处理问题的基本原则 · Qiyexuxu</title><meta name="description" content="由递归思想处理问题的基本原则 - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">由递归思想处理问题的基本原则</h1><div class="tags"><a href="/tags/算法/" class="tag-title">#算法</a></div><div class="post-info">Jun 30, 2014</div><div class="post-content"><p>在我的博文<a href="https://abnerwang.blog.ustc.edu.cn/%E5%85%B3%E4%BA%8E%E9%80%92%E5%BD%92%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E6%83%B3%E6%B3%95/" target="_blank" rel="noopener">关于递归的一些简单想法</a>，我用自己的理解谈了一些关于递归的看法，下面用 <a href="http://book.douban.com/subject/1139426/" target="_blank" rel="noopener">《数据结构与算法分析——C语言描述》</a> 一书中第 9 页的四条基本原则将我的思想加以规范化，并在后续的不断加强学习中不断完善本文的内容。</p>
+<p>在编写递归程序的时候，要牢记递归的四条基本原则：</p>
+<a id="more"></a>
+<ol>
+<li>基准情形：必须总有某些基准情形，它无需递归就能解出 —— 构成递归终止条件</li>
+<li>不断推进：对于那些需要递归求解的情形，每一次递归调用都必须要使求解状况朝接近基准情形的方向推进 —— 由初始情形通过递归调用不断向递归终止条件推进</li>
+<li>设计法则：假设所有的递归调用都能运行</li>
+<li>合成效益法则：在求解一个问题的同一实例时，切勿在不同的递归调用中做重复性的工作（三天内在斐波那契数列的实现中详细介绍这条法则并补充本文内容）</li>
+</ol>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/08/27/2014/08-27-vim-notes1/" class="prev">PREV</a><a href="/2014/06/30/2014/06-30-algorithms-max-subseq/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+var disqus_identifier = '2014/06/30/2014/06-30-algorithms-recursion-rules/';
+var disqus_title = '由递归思想处理问题的基本原则';
+var disqus_url = 'http://blog.keeplearning.group/2014/06/30/2014/06-30-algorithms-recursion-rules/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//abnerwang.disqus.com/count.js" async></script><div class="copyright"><p>© 2014 - 2018 <a href="http://blog.keeplearning.group">David Wang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

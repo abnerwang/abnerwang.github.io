@@ -1,0 +1,42 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Vim常用技巧总结2 · Qiyexuxu</title><meta name="description" content="Vim常用技巧总结2 - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Vim常用技巧总结2</h1><div class="tags"><a href="/tags/Vim/" class="tag-title">#Vim</a></div><div class="post-info">Aug 29, 2014</div><div class="post-content"><ol>
+<li><p>在光标所在行查找字符在普通模式下用 <code>f{char}</code> 命令，光标会移动到该字符所在的位置，向下重复查找在普通模式下用 <code>;</code>，向上回退查找用 <code>,</code></p>
+</li>
+<li><p>在光标所在行查找与替换在普通模式下用 <code>:s/target/replacement</code>，其中 <code>target</code> 和 <code>replacement</code> 分别用被替换的字符或字符串和替换的字符或字符串代替，重复在普通模式下用 <code>&amp;</code> 命令，回退在普通模式下用 <code>u</code> 手动控制每一次替换在普通模式下用 <code>:%s/target/replacement/gc</code>，这样的话 Vim 会在每一次出现替换的地方询问是否替换，有以下几种选项：  </p>
+</li>
+</ol>
+<a id="more"></a>
+<p>   <code>y</code>: 替换此处匹配<br>   <code>n</code>: 忽略此处匹配<br>   <code>a</code>: “all” —— 替换此处与之后所有的匹配<br>   <code>l</code>: “last” —— 替换此处匹配后退出<br>   <code>q</code>: 退出替换过程<br>   <code>&lt;C-e&gt;</code>: 向上滚动屏幕<br>   <code>&lt;C-y&gt;</code>: 向下滚动屏幕</p>
+<ol start="3">
+<li><p>查找当前光标下的单词在普通模式下用 <code>*</code></p>
+</li>
+<li><p>一键移动，另一键修改 —— <code>.</code> 范式</p>
+</li>
+<li><p>写代码思维停顿时请回到 普通模式，把思维单元切成 块，这样方便犯了错误在普通模式下按 <code>u</code> 回退操作的时候能接上之前的思路接着修改，在适当的时候，换行操作采用 <code>&lt;Esc&gt;o</code>，这样会使撤销时有更小的粒度，有利于编码操作</p>
+</li>
+<li><p>在普通模式下按 <code>db</code>，反向删除从光标起始位置到单词开头的内容，但会原封未动地留下最后一个字符</p>
+</li>
+<li><p>在普通模式下按 <code>b</code>，会将光标移动到单词的开头</p>
+</li>
+<li><p>在普通模式下按 <code>daw</code>，即 “delete a word”，删除一个单词</p>
+</li>
+<li><p>在普通模式下 <code>&lt;C-a&gt;</code> 和 <code>&lt;C-x&gt;</code> 分别对数字执行加和减操作，在不带次数执行时，它们会逐个加减，但如果带一个次数前缀，那么就可以用它们加减任意整数，例如我们把光标移动到数字 <code>5</code> 上，执行 <code>10&lt;C-a&gt;</code> 就会把它变成 <code>15</code>，如果光标不在数字上，那么 <code>&lt;C-a&gt;</code> 和 <code>&lt;C-x&gt;</code> 会在当前行正向查找一个数字，如果找到了，它就径直跳到那里</p>
+</li>
+<li><p>在普通模式下按 <code>yyp</code> 会复制当前行并粘贴到下一行</p>
+</li>
+<li><p>在普通模式下加上次数表示重复，例如 <code>2dw</code> 或 <code>d2w</code> 都表示要删除两个单词，<code>2u</code> 表示回退两步等等，但是最好只在必要时使用次数</p>
+</li>
+<li><p>在普通模式下按 <code>dl</code> 删除当前光标下的单词，但不进入插入模式，按 <code>dap</code> 删除整个段落</p>
+</li>
+<li><p>在 Vim 中，操作符 <code>+</code> 动作命令 <code>=</code> 操作，当一个操作符被连续调用两次时，它会作用于当前行，例如： <code>dd</code> 删除当前行，<code>&gt;&gt;</code> 缩进当前行，但是 <code>gU</code> 命令是一个特殊情况，既可以用 <code>gUgU</code>，也可以用简化版本的 <code>gUU</code> 来使它作用于当前行，常用的操作符命令如下：</p>
+<p><code>c</code>： 修改<br><code>d</code>： 删除<br><code>y</code>： 复制到寄存器<br><code>g~</code>： 反转大小写<br><code>gu</code>： 转换为小写<br><code>gU</code>： 转换为大写<br><code>&gt;</code>： 增加缩进<br><code>&lt;</code>： 减小缩进<br><code>=</code>： 自动缩进<br><code>!</code>： 使用外部程序过滤 <code>{motion}</code>所跨越的行</p>
+</li>
+</ol>
+</div></article></div></main><footer><div class="paginator"><a href="/2015/03/16/2015/03-16-c-Fahrenheit-Celsius/" class="prev">PREV</a><a href="/2014/08/27/2014/08-27-vim-notes1/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+var disqus_identifier = '2014/08/29/2014/08-29-vim-notes2/';
+var disqus_title = 'Vim常用技巧总结2';
+var disqus_url = 'http://blog.keeplearning.group/2014/08/29/2014/08-29-vim-notes2/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//abnerwang.disqus.com/count.js" async></script><div class="copyright"><p>© 2014 - 2018 <a href="http://blog.keeplearning.group">David Wang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

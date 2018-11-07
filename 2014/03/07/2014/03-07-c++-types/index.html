@@ -1,0 +1,28 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> C++ 中的基本内置类型以及编程过程中对于类型的选择建议 · Qiyexuxu</title><meta name="description" content="C++ 中的基本内置类型以及编程过程中对于类型的选择建议 - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">C++ 中的基本内置类型以及编程过程中对于类型的选择建议</h1><div class="tags"><a href="/tags/C/" class="tag-title">#C++</a></div><div class="post-info">Mar 7, 2014</div><div class="post-content"><p>C++ 中定义了包括 <strong>算术类型</strong> 和 <strong>空类型</strong> 在内的数据类型，空类型一般只用于特定的场合，例如在程序运行完毕后补要求返回任何值时，可对函数类型用空类型，算术类型总的来说包括两个方面：<strong>整型</strong>(包括字符型以及布尔型在内) 和 <strong>浮点型</strong>，C++ 标准只是规定了算术类型所占的最小比特位：</p>
+<a id="more"></a>
+<p><img src="http://ww1.sinaimg.cn/mw690/79225320gw1ee758cab7aj20dx0ahq3y.jpg" alt=""></p>
+<p><strong>不同的编译器可以给予这些算术类型比以上这些标准尺寸更大的不同尺寸</strong>，对于算术类型，需要强调的有以下几点：</p>
+<ol>
+<li>bool 类型只有两个值，非真(1)即假(0)，当给一个布尔类型赋一个非零值时，统统按 <strong>真(1)</strong> 对待，只有赋 0 时，才是 <strong>假(0)</strong></li>
+<li>int、short、long、long long 全是带符号类型，需要无符号类型时在它的前面加上 unsigned 即可，unsigned int 也通常写作 unsigned</li>
+<li>字符型被分为 char、unsigned char 和 signed char 三种，特别需要注意的是， char 和 signed char 并不一样，尽管字符型有三种，但是字符的表现形式却只有两种：带符号的和无符号的，类型 char 实际上会表现为以上两种形式之一，具体哪种由编译器决定</li>
+</ol>
+<hr>
+<p>如何选择类型:</p>
+<ul>
+<li>当明确知道数值不可能为负时，选择无符号类型</li>
+<li>使用 int 执行整数运算，在实际应用中，short 常常显得太小而 long 一般和 int 有一样的尺寸，如果你的数值超过了 int 的表示范围，选用 long long</li>
+<li>在算术表达式中不要使用 char 或者 bool，只有在存放字符或者布尔值时才使用它们，因为类型 char 在一些机器上是有符号的，而在另一些机器上又是无符号的，所以如果使用 char 进行运算特别容易出问题，如果你需要使用一个不大的整数，那么明确指定它的类型是 signed char 或者 unsigned char</li>
+<li>执行浮点数运算选用 double ，这是因为 float 通常精度不够而且双精度浮点数和单精度浮点数的计算代价相差无几，事实上，对于某些机器来说，双精度运算甚至比单精度还快，long double 提供的精度在一般情况下是没有必要的，况且它所带来的运算时消耗是不能被忽略的</li>
+</ul>
+<hr>
+<p>参考了 <a href="http://book.douban.com/subject/25708312/" target="_blank" rel="noopener">C++ Primer中文版第5版</a></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/03/07/2014/03-07-c++-unsigend-exp/" class="prev">PREV</a><a href="/2014/03/06/2014/03-06-c++-signed-to-unsigned/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+var disqus_identifier = '2014/03/07/2014/03-07-c++-types/';
+var disqus_title = 'C++ 中的基本内置类型以及编程过程中对于类型的选择建议';
+var disqus_url = 'http://blog.keeplearning.group/2014/03/07/2014/03-07-c++-types/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//abnerwang.disqus.com/count.js" async></script><div class="copyright"><p>© 2014 - 2018 <a href="http://blog.keeplearning.group">David Wang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

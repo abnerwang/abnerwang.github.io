@@ -1,0 +1,28 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Python虚拟环境 · Qiyexuxu</title><meta name="description" content="Python虚拟环境 - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Python虚拟环境</h1><div class="tags"><a href="/tags/Python/" class="tag-title">#Python</a></div><div class="post-info">Sep 29, 2016</div><div class="post-content"><p>虚拟环境是 Python 解释器的一个私有副本，在这个环境中你可以安装私有包，而且不会影响系统中安装的全局 Python 解释器。虚拟环境非常有用，可以在系统的 Python 解释器中避免包的混乱和版本的冲突。为每个程序单独创建虚拟环境可以保证程序只能访问虚拟环境中的包，从而保证全局解释器的干净整洁，使其只作为创建（更多）虚拟环境的源。使用虚拟环境还有个好处，那就是不需要管理员权限。</p>
+<a id="more"></a>
+<p>虚拟环境使用第三方实用工具 <code>virtualenv</code> 创建，在终端中输入以下命令可以检查系统是否安装了 <code>virtualenv</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virtualenv --version</span><br></pre></td></tr></table></figure>
+<p>Ubuntu 用户可以使用下列命令安装它：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-virtualenv</span><br></pre></td></tr></table></figure>
+<p>如果是 Mac OS X （macOS）系统，就可以使用 <code>easy_install</code> 安装 <code>virtualenv</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo easy_install virtualenv</span><br></pre></td></tr></table></figure>
+<p>注意：针对不同版本的 Python，可以使用不同版本的 <code>easy_install</code>，例如针对 Python 3.5，可以使用如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo easy_install-3.5 virtualenv</span><br></pre></td></tr></table></figure>
+<p>在程序文件夹中使用 <code>virtualenv</code> 命令创建虚拟环境，这个命令只有一个必需的参数，即虚拟环境的名字。创建虚拟环境后，当前文件夹中会出现一个子文件夹，名字就是上述命令中指定的参数，与虚拟环境相关的文件都保存在这个子文件夹中。按照惯例，一般虚拟环境会被命名为 <code>venv</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virtualenv venv</span><br></pre></td></tr></table></figure>
+<p>在程序文件夹中运行以上命令后，该文件夹中就有了一个名为 <code>venv</code> 的子文件夹，它保存一个全新的虚拟环境，其中有一个私有的 Python 解释器。在使用这个虚拟环境之前，你需要先将其“激活”。在 bash 中，可以使用下面的命令激活这个虚拟环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> venv/bin/activate</span><br></pre></td></tr></table></figure>
+<p>虚拟环境被激活后，其中 Python 解释器的路径就被添加进了 PATH 中，但这种改变不是永久性的，它只会影响当前的命令行会话，为了提醒你已经激活了虚拟环境，激活虚拟环境的命令会修改命令行提示符，加入环境名：<br><code>(venv) $</code></p>
+<p>当虚拟环境中的工作完成后，如果你想回到全局 Python 解释器中，可以在命令行提示符下输入 <code>deactivate</code>。</p>
+<p>大多数 Python 包都使用 <code>pip</code> 实用工具安装，使用 <code>virtualenv</code> 创建虚拟环境时会自动安装 <code>pip</code>，激活虚拟环境后，<code>pip</code> 所在路径会自动添加进 PATH。</p>
+<hr>
+<p>此文参考<a href="https://book.douban.com/subject/26274202/" target="_blank" rel="noopener">《Flask Web 开发》</a></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/01/18/2017/01-18-python-iterable/" class="prev">PREV</a><a href="/2016/09/28/2016/09-28-python-notes10/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+var disqus_identifier = '2016/09/29/2016/09-29-python-virtualenv/';
+var disqus_title = 'Python虚拟环境';
+var disqus_url = 'http://blog.keeplearning.group/2016/09/29/2016/09-29-python-virtualenv/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//abnerwang.disqus.com/count.js" async></script><div class="copyright"><p>© 2014 - 2018 <a href="http://blog.keeplearning.group">David Wang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

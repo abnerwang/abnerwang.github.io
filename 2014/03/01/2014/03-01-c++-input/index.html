@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 有关C++输入，类，文件重定向的使用和成员函数的简单小结 · Qiyexuxu</title><meta name="description" content="有关C++输入，类，文件重定向的使用和成员函数的简单小结 - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">有关C++输入，类，文件重定向的使用和成员函数的简单小结</h1><div class="tags"><a href="/tags/C/" class="tag-title">#C++</a></div><div class="post-info">Mar 1, 2014</div><div class="post-content"><ol>
+<li><p>读取数量不定的输入数据</p>
+<p>在日常生活中，我们经常需要处理的是输入数据量不确定的数据，那么，在 C++ 语言中怎样将这些数量不确定的数据输入到计算机呢？譬如，我们输入不定量的数据后，求这些数据的和， C++ 中是怎么实现的呢？说来也很简单，看看下面的代码吧：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>, val = <span class="number">0</span>;   <span class="comment">/* 变量的初始化 */</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; val)  <span class="comment">/* 读取数量不定的输入数据 */</span></span><br><span class="line">        sum + = val;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Sum is "</span> &lt;&lt; sum &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由上面非常简单的一个小程序我们可以看到，实现读取不定数量的输入数据是依靠 <code>while (std::cin &gt;&gt; val)</code> 来实现的，表达式 <code>std::cin &gt;&gt; val</code> 从标准输入读取数据后存入变量 <code>val</code> 并且返回一个 istream 对象（输入运算符返回其左侧运算对象，即 <code>std::cin</code> ），也就是说， <code>while</code> 循环的条件是一个 istream 类型的对象，其效果是检测流的状态，如果流是有效的，即流没有遇到错误，那么检测成功，当遇到<strong>文件结束符或者一个无效的输入时（例如在以上程序中读入的值不是一个整数）</strong>，条件变假</p>
+<p>从键盘输入文件结束符：<br>Windows: Ctrl + Z，然后按 Enter 或 Return 键<br>UNIX/Mac OS X: Ctrl + D</p>
+</li>
+</ol>
+<a id="more"></a>
+<ol start="2">
+<li><p>类简介</p>
+<p>需要使用头文件来访问为自己的应用程序编写的类，<strong>习惯上，头文件根据其中定义的类的名字来命名</strong>，我们通常使用 <code>.h</code> 作为头文件的后缀，但也有一些程序员习惯使用 <code>.H</code> 、<code>.hpp</code> 或者 <code>.hxx</code> ，标准库头文件通常不带后缀，编译器一般不关心头文件名的形式，但有的 IDE 对此有特定的要求</p>
+<p>每个类定义了一个类型，其类型名就是类名</p>
+<p>包含来自标准库的头文件时，用尖括号（&lt; &gt;）包含头文件名，对于不属于标准库的头文件，则用双引号（” “）包围</p>
+</li>
+<li><p>使用文件重定向</p>
+<p>当我们在反复测试程序的时候，一些输入数据要进行多次重复输入，效率是很低的，因为你在每一次测试程序的时候都需要重复性地输入相同的数据，完全是可以不用这么做的，下面简单介绍一种一次性到位的做法 —— 使用文件重定向，例如：</p>
+<p><code>$ prog &lt;infile &gt;outfile</code></p>
+<p>$ 是系统提示符， prog 是编译后所产生的可执行文件，上述命令会从一个名为 infile 的文件中读取输入数据，并将输出结果写入到一个名为 outfile 的文件中，两个文件都位于当前目录中</p>
+</li>
+<li><p>成员函数简介</p>
+<p>当用点运算符访问一个成员函数时，如 <code>item1.isbn()</code> ，通常我们是想（效果也确实是）调用该函数，使用调用运算符（ () ）来调用一个函数，<strong>调用运算符是一对圆括号</strong>，里面放置实参列表（可能为空）</p>
+</li>
+</ol>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/03/06/2014/03-06-c++-errors/" class="prev">PREV</a><a href="/2014/02/11/2014/02-11-c++-iostream/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+var disqus_identifier = '2014/03/01/2014/03-01-c++-input/';
+var disqus_title = '有关C++输入，类，文件重定向的使用和成员函数的简单小结';
+var disqus_url = 'http://blog.keeplearning.group/2014/03/01/2014/03-01-c++-input/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//abnerwang.disqus.com/count.js" async></script><div class="copyright"><p>© 2014 - 2018 <a href="http://blog.keeplearning.group">David Wang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

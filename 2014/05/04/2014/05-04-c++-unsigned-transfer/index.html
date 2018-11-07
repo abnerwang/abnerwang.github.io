@@ -1,0 +1,19 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> C++ 无符号类型的运算对象参与的类型转换 · Qiyexuxu</title><meta name="description" content="C++ 无符号类型的运算对象参与的类型转换 - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">C++ 无符号类型的运算对象参与的类型转换</h1><div class="tags"><a href="/tags/C/" class="tag-title">#C++</a></div><div class="post-info">May 4, 2014</div><div class="post-content"><p>当某个运算符的运算对象类型不一致，且其中某一个运算对象是无符号类型时，这个需要进行相应地类型转换，至于类型转换的结果，则 <strong>依赖于机器中各个整数类型的相对大小</strong> 。</p>
+<a id="more"></a>
+<blockquote>
+<p><strong>当某个运算符的运算对象类型不一致，且其中某一个运算对象是无符号类型时，分为以下几种情况：</strong></p>
+<ul>
+<li>当 <strong>无符号类型</strong> 的运算对象 <strong>大于</strong> <strong>有符号类型</strong> 的运算对象时，则将 <strong>有符号类型转换为相应的无符号类型</strong> 后再进行运算，转换规则见我的博客 <a href="https://abnerwang.blog.ustc.edu.cn/c-%E4%B8%AD%E6%9C%89%E7%AC%A6%E5%8F%B7%E7%B1%BB%E5%9E%8B%E5%88%B0%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2/" target="_blank" rel="noopener">C++ 中有符号类型到无符号类型的转换</a></li>
+<li>当 <strong>有符号类型</strong> 的运算对象 <strong>大于</strong> <strong>无符号类型</strong> 的运算对象时，情况将稍微复杂一些：<br>1、 如果机器中这个 <strong>无符号类型所能表示的数值范围在这个有符号类型的数值范围内</strong> ，则将这个 <strong>无符号类型</strong>的对象 <strong>转换为</strong> <strong>有符号类型</strong> 后进行运算；<br>2、如果机器中这个 <strong>无符号类型所能表示的数值范围超出了这个有符号类型的数值范围</strong> ，则要将 <strong>有符号类型</strong>的对象 <strong>转换为</strong> <strong>无符号类型</strong> 后进行运算。</li>
+</ul>
+</blockquote>
+<p>还是那句话，切勿混合使用带符号类型和无符号类型，因为混合使用有符号类型和无符号类型常常导致与我们期望值大相径庭的结果。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/05/06/2014/05-06-c++-const/" class="prev">PREV</a><a href="/2014/04/27/2014/04-27-c++-left-right/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+var disqus_identifier = '2014/05/04/2014/05-04-c++-unsigned-transfer/';
+var disqus_title = 'C++ 无符号类型的运算对象参与的类型转换';
+var disqus_url = 'http://blog.keeplearning.group/2014/05/04/2014/05-04-c++-unsigned-transfer/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//abnerwang.disqus.com/count.js" async></script><div class="copyright"><p>© 2014 - 2018 <a href="http://blog.keeplearning.group">David Wang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

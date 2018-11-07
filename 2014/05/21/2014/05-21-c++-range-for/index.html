@@ -1,0 +1,46 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 范围 for 语句与二维数组 · Qiyexuxu</title><meta name="description" content="范围 for 语句与二维数组 - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">范围 for 语句与二维数组</h1><div class="tags"><a href="/tags/C/" class="tag-title">#C++</a></div><div class="post-info">May 21, 2014</div><div class="post-content"><p>为了讲清楚我们要说明的问题，首先我们来定义一个二维数组：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ival[<span class="number">2</span>][<span class="number">3</span>] = &#123;</span><br><span class="line">    &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这是一个2行3列的二维数组，如果我们要使用范围 for 循环来输出这个二维数组中的元素的话，相应地代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;row : ival) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> elem : row)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; elem &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>上面的代码能不能完成预期的输出二维数组元素的功能呢？我们来实际运行一下，在 VS2013 中的代码如下：</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/79225320gw1eglp8h4qa8j20oa0imq49.jpg" alt=""></p>
+<p>运行结果如下：</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/79225320gw1eglpa64jsxj20nu0fymxg.jpg" alt=""></p>
+<p>显然，实现了我们预期的目的，但是这里有一个问题，为什么要在最外层的范围 <code>for</code> 循环使用 <code>&amp;</code> 操作符呢？写成 <code>for (auto row : ival)</code> 不行么？当然是不行的，下面就来交待一下理由。</p>
+<p>我们不妨将 <code>for (auto &amp;row : ival)</code> 改写成传统的 <code>for</code> 循环试试：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> mbeg = begin(ival), mend = end(ival);</span><br><span class="line">    mbeg != mend; ++mbeg)</span><br><span class="line">    <span class="keyword">auto</span> &amp;row = *mbeg;</span><br></pre></td></tr></table></figure>
+<p>在 VS2013 中运行一下看看改写的是否正确：</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/79225320gw1eglpop66rcj20ou0mmgnf.jpg" alt=""></p>
+<p>运行结果如下：</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/79225320gw1eglpa64jsxj20nu0fymxg.jpg" alt=""></p>
+<p>显然我们改写的是对的，实际上，范围 <code>for</code> 循环本质上就是我们改写的传统 <code>for</code> 循环，下面就我们改写后的传统 <code>for</code> 循环来分析一下：</p>
+<p><code>begin(ival)</code> 得到的是指向 <code>ival</code> 首元素的指针，<code>ival</code> 的首元素是什么呢？二维数组本质上是数组的数组，所以我们得到的是一个指向含有 3 个元素的一维数组的指针，指向数组的指针实际上是指向数组首元素的指针的指针（见我的博文： <strong>指向数组的指针与指向数组首元素的指针</strong> ），因此我们对 <code>mbeg</code> 解引用之后将会得到一个指向某个一维数组首元素的指针，相当于一个一维数组的数组名，如果没有 <code>&amp;</code> 操作符，即如果是以下的形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> row = *mbeg;</span><br></pre></td></tr></table></figure>
+<p>row 的类型将会是 <code>int*</code>，即 row 是一个整型指针的副本，接下来的范围 for 语句就成了遍历一个指针内的元素了，这显然是错误的，与我们的初衷大相径庭，但是如果我们加上一个引用操作符（ &amp; ），对 mbeg 解引用之后得到的指针相当于一个一维数组的数组名，因此 row 的类型就变成了 <code>int (&amp;row)[3]</code>，即 row 是与一个含有 3 个整型数的一维数组绑定的引用，接下来的范围 for 语句就是遍历这个含有 3 个整型数的一维数组，这与我们的初衷是相符的，实际上：</p>
+<p><strong>要使用范围 for 语句处理多维数组，除了最内层的循环外，其他所有循环的控制变量都应该是引用类型</strong></p>
+<p>编译原理的知识告诉我们， <strong>指针的类型包括指针所指向的类型</strong> ，因此，指向数组的指针与指向数组首元素的指针是不同类型的指针，指向数组首元素的指针与指向一个普通元素的指针也属于不同类型的指针，这是编译方面的知识，适当了解一下有助于我们理解相关的语言特性。</p>
+<hr>
+<p>还有一个极易混淆的地方需要特别指出一下，在我们处理 <code>initializer_list</code> 类型的元素的时候，通常也会用到 <code>&amp;</code> 操作符：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打印 list 中的元素</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span> <span class="params">(<span class="built_in">initializer_list</span>&lt;<span class="built_in">string</span>&gt; <span class="built_in">list</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;elem : <span class="built_in">list</span>)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; elem &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的范围 <code>for</code> 语句为什么要用到引用操作符呢？实际上，不用引用操作符也是可以的，也就是说，这里的范围 <code>for</code> 语句可以写成如下的形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> elem : <span class="built_in">list</span>)</span><br></pre></td></tr></table></figure>
+<p>这样最后仍然能够得到一样的结果，这里使用 &amp; 操作符主要是为了避免存储空间的浪费和拷贝造成的时间效率低下而直接将 elem 绑定到一个 const string 类型的对象上（initializer_list 类型的对象里面的元素都是常量），如果不使用 &amp; 操作符的话， elem 将是 list 里面元素的拷贝，造成了存储空间的浪费，下面将程序在 VS2013 中运行一下以验证上面的想法。</p>
+<p>加了 <code>&amp;</code> 操作符的情形：</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/79225320gw1eglrdtq98ej20ly0j2myj.jpg" alt=""></p>
+<p>运行结果如下：</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/79225320gw1eglrf54y9pj20ny0fwgm7.jpg" alt=""></p>
+<p>未加 <code>&amp;</code> 操作符的情形：</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/79225320gw1eglrhprbx0j20n00isac0.jpg" alt=""></p>
+<p>运行结果如下：</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/79225320gw1eglrf54y9pj20ny0fwgm7.jpg" alt=""></p>
+<p>完全符合预期的想法。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/05/23/2014/05-23-c++-left-value/" class="prev">PREV</a><a href="/2014/05/20/2014/05-20-c++-two/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+var disqus_identifier = '2014/05/21/2014/05-21-c++-range-for/';
+var disqus_title = '范围 for 语句与二维数组';
+var disqus_url = 'http://blog.keeplearning.group/2014/05/21/2014/05-21-c++-range-for/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//abnerwang.disqus.com/count.js" async></script><div class="copyright"><p>© 2014 - 2018 <a href="http://blog.keeplearning.group">David Wang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
