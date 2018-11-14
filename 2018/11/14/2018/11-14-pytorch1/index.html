@@ -20,7 +20,7 @@
 <p>Output:<br><img src="http://wx3.sinaimg.cn/mw690/79225320gy1fx7mtib98oj214103ojrh.jpg" alt=""></p>
 <p>6 . Tensor 可以通过 <code>.cuda</code> 方法转换为 GPU 的 Tensor，从而享受 GPU 带来的加速运算。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 在不支持 CUDA 的机器上，下一步还是在 CPU 上运行</span><br><span class="line">device = t.device(&quot;cuda:0&quot; if t.cuda.is_available() else &quot;cpu&quot;)</span><br><span class="line">x = x.to(device)</span><br><span class="line">y = y.to(device)</span><br><span class="line">z = x + y</span><br><span class="line">print(z)</span><br></pre></td></tr></table></figure>
-</div></article></div></main><footer><div class="paginator"><a href="/2017/07/31/2017/07-31-learn-program/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+</div></article></div></main><footer><div class="paginator"><a href="/2018/11/14/2018/11-14-pytorch2/" class="prev">PREV</a><a href="/2017/07/31/2017/07-31-learn-program/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
 var disqus_identifier = '2018/11/14/2018/11-14-pytorch1/';
 var disqus_title = 'Pytorch 学习笔记（一）';
 var disqus_url = 'http://blog.keeplearning.group/2018/11/14/2018/11-14-pytorch1/';
