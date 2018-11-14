@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.keeplearning.group/"/>
-  <updated>2018-11-14T12:45:26.334Z</updated>
+  <updated>2018-11-14T13:19:51.733Z</updated>
   <id>http://blog.keeplearning.group/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>理解 batch_size</title>
+    <link href="http://blog.keeplearning.group/2018/11/14/2018/11-14-batch_size/"/>
+    <id>http://blog.keeplearning.group/2018/11/14/2018/11-14-batch_size/</id>
+    <published>2018-11-14T12:52:00.000Z</published>
+    <updated>2018-11-14T13:19:51.733Z</updated>
+    
+    <content type="html"><![CDATA[<p>梯度下降主要有以下三种：  </p><ul><li>batch gradient descent：即批梯度下降，其计算开销大，计算速度慢，不支持在线学习；</li><li>stochastic gradient descent：即随机梯度下降，收敛性能不太好，可能 hit 不到最优点；</li><li>mini-batch gradient descent：即小批量梯度下降，通常所说的 batch_size 指的就是这个批量的大小。</li></ul><p>batch_size = 1 时称为在线学习。</p><p>batch_size 的选择，首先决定的是下降方向，如果数据集较小，完全可以采用全数据集的形式。</p><p>增大 batch_size 的好处：</p><ul><li>内存的利用率提高了，大矩阵乘法的并行化效率提高了；</li><li>跑完一次 epoch（即全数据集）所需迭代次数减少，对于相同数据量的处理速度进一步加快；</li><li>在一定范围内，batch_size 越大，其确定的下降方向就越准确，引起训练震荡越小。</li></ul><p>盲目增大 batch_size 的坏处：</p><ul><li>当数据集太大时，内存撑不住；</li><li>跑完全数据集所需迭代次数减少了，但要达到相同的精度，时间开销大，参数的修正更加缓慢；</li><li>batch_size 增大到一定程度，其确定的下降方向已基本不再变化。</li></ul><p><strong>总结：</strong>  </p><p>1) batch_size 太小，而类别又比较多的时候，可能会导致 loss 函数震荡而不收敛，尤其是网络比较复杂的时候；</p><p>2) 随着 batch_size 的增大，处理相同数据量的速度越快；</p><p>3) 随着 batch_size 的增大，达到相同的精度所需的训练 epoch 数量越多；</p><p>4) 由于上述两种因素的矛盾，batch_size 增加到某个时候，达到时间上的最优；</p><p>5) 由于最终收敛精度会陷入不同的局部极值，因此，batch_size 增大到某些时候，达到最终收敛精度上的最优；</p><p>6) 过大的 batch_size 会使网络收敛到一些不好的局部最优点，同样太小的 batch_size 会使网络收敛太慢、不易收敛等；</p><p>7) 具体 batch_size 的选取和训练集的样本数目有关。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;梯度下降主要有以下三种：  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;batch gradient descent：即批梯度下降，其计算开销大，计算速度慢，不支持在线学习；&lt;/li&gt;
+&lt;li&gt;stochastic gradient descent：即随机梯度下降，收敛性能不太好，可能 h
+      
+    
+    </summary>
+    
+      <category term="机器学习与深度学习" scheme="http://blog.keeplearning.group/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://blog.keeplearning.group/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="batch_size" scheme="http://blog.keeplearning.group/tags/batch-size/"/>
+    
+  </entry>
   
   <entry>
     <title>Pytorch 学习笔记（二）</title>
@@ -469,32 +499,6 @@
 &lt;li&gt;&lt;p&gt;遍历字典中的键－值对：&lt;/p&gt;
 &lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;user_0 = &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;string&quot;&gt;&#39;username&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;efermi&#39;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;string&quot;&gt;&#39;first&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;enrico&#39;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;string&quot;&gt;&#39;last&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;fermi&#39;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; key, value &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; user_0.items():&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    print(&lt;span class=&quot;string&quot;&gt;&quot;\nKey: &quot;&lt;/span&gt; + key)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    print(&lt;span class=&quot;string&quot;&gt;&quot;Value: &quot;&lt;/span&gt; + value)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 结果为：&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Key: first&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Value: enrico&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Key: last&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Value: fermi&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Key: username&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Value: efermi&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;键－值对的返回顺序不一定与存储顺序相同。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="编程语言" scheme="http://blog.keeplearning.group/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="Python" scheme="http://blog.keeplearning.group/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python 学习笔记（四）</title>
-    <link href="http://blog.keeplearning.group/2016/08/25/2016/08-25-Python-notes4/"/>
-    <id>http://blog.keeplearning.group/2016/08/25/2016/08-25-Python-notes4/</id>
-    <published>2016-08-25T08:00:00.000Z</published>
-    <updated>2018-11-07T07:13:14.302Z</updated>
-    
-    <content type="html"><![CDATA[<ol><li><p>用 <code>in</code> 和 <code>not in</code> 检查特定值是否包含在列表中：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">requested_toppings = [<span class="string">'mushrooms'</span>, <span class="string">'onions'</span>, <span class="string">'pineapple'</span>]</span><br><span class="line">print(<span class="string">'mushrooms'</span> <span class="keyword">in</span> requested_toppings)  <span class="comment"># True</span></span><br><span class="line">print(<span class="string">'pepperoni'</span> <span class="keyword">in</span> requested_toppings)  <span class="comment"># False</span></span><br><span class="line"> </span><br><span class="line">banned_users = [<span class="string">'andrew'</span>, <span class="string">'carolina'</span>, <span class="string">'david'</span>]</span><br><span class="line">user = <span class="string">'marie'</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> user <span class="keyword">not</span> <span class="keyword">in</span> banned_users:</span><br><span class="line">    print(user.title() + <span class="string">", you can post a response if you wish."</span>)</span><br></pre></td></tr></table></figure></li></ol><a id="more"></a><ol start="2"><li><p>下面这段程序  <code>str()</code>  是必须的：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">age = <span class="number">12</span></span><br><span class="line"><span class="keyword">if</span> age &lt; <span class="number">4</span>:</span><br><span class="line">    price = <span class="number">0</span></span><br><span class="line"><span class="keyword">elif</span> age &lt; <span class="number">18</span>:</span><br><span class="line">    price = <span class="number">5</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    price = <span class="number">10</span></span><br><span class="line"> </span><br><span class="line">print(<span class="string">"Your admission cost is $"</span> + str(price) + <span class="string">"."</span>)</span><br></pre></td></tr></table></figure><p>​</p></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;用 &lt;code&gt;in&lt;/code&gt; 和 &lt;code&gt;not in&lt;/code&gt; 检查特定值是否包含在列表中：&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;requested_toppings = [&lt;span class=&quot;string&quot;&gt;&#39;mushrooms&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;onions&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;pineapple&#39;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;print(&lt;span class=&quot;string&quot;&gt;&#39;mushrooms&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; requested_toppings)  &lt;span class=&quot;comment&quot;&gt;# True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;print(&lt;span class=&quot;string&quot;&gt;&#39;pepperoni&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; requested_toppings)  &lt;span class=&quot;comment&quot;&gt;# False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;banned_users = [&lt;span class=&quot;string&quot;&gt;&#39;andrew&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;carolina&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;david&#39;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;user = &lt;span class=&quot;string&quot;&gt;&#39;marie&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; user &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; banned_users:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    print(user.title() + &lt;span class=&quot;string&quot;&gt;&quot;, you can post a response if you wish.&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
     

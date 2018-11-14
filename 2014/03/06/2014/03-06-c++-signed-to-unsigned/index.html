@@ -14,7 +14,7 @@
 <p>( 二 )、 让我们把目光转回到第一个代码片段，将 unsigned char j 赋一个超出其表示范围内的 <strong>正值</strong> 258 后，将 j 的值赋给 k，最后输出 k = 2，即 j 的值变为了 2 ，这又是为什么呢？实际上，<strong>当我们赋给一个无符号类型一个超出它表示范围的 正值 时，结果是将我们所赋的这个值对此无符号类型所能表示的数的总个数取模后的余数</strong>，即 258 % 256 = 2，符合程序运行结果</p>
 <p>( 三 )、 观察第一个代码片段中第 11 行之后的部分，<strong>一个有符号数 i 与一个无符号数 u</strong> 相加的情形，最后得到 4294967264 这么一个奇怪的数字，而不是像希望的一样得到 -32 ，这是为什么呢？这是因为 <strong>这个表达式中无符号数大于有符号数</strong> ， 此种情形下， <strong>当把一个有符号类型和无符号类型相加时，需要先将有符号类型的数转换为无符号类型的数后再进行加法运算</strong> ，(一)(二)中已经详细说明了怎样将一个有符号类型的数转换为一个无符号类型的数，对于这种情况，-42 + 4294967296 = 4294967254 ,在 unsigned 的表示范围内，即 -42 转换为无符号类型后为 4294967254 ，然后再将此数值加上 i (即 10 ) ，得 4294967264 ，符合最后得到的程序运行结果</p>
 <p>最后我们还需要另外强调的一点是， <strong>当我们给带符号类型赋予一个超过其表示范围的值时，其结果是未定义的</strong> ，程序可能继续执行，可能崩溃，也可能生成垃圾数据。</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2014/03/07/2014/03-07-c++-types/" class="prev">PREV</a><a href="/2014/03/06/2014/03-06-c++-errors/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+</div></article></div></main><footer><div class="paginator"><a href="/2014/03/07/2014/03-07-c++-types/" class="prev">上一篇</a><a href="/2014/03/06/2014/03-06-c++-errors/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
 var disqus_identifier = '2014/03/06/2014/03-06-c++-signed-to-unsigned/';
 var disqus_title = 'C++ 中有符号类型到无符号类型的转换';
 var disqus_url = 'http://blog.keeplearning.group/2014/03/06/2014/03-06-c++-signed-to-unsigned/';

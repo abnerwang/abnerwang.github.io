@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.keeplearning.group/2018/11/14/2018/11-14-batch_size/</loc>
+    
+    <lastmod>2018-11-14T13:19:51.733Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.keeplearning.group/2018/11/14/2018/11-14-pytorch2/</loc>
     
     <lastmod>2018-11-14T12:45:26.334Z</lastmod>
