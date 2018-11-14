@@ -7,7 +7,7 @@
 <p>我们来看看对于表达式 <code>++i--</code> 加上括号，变成 <code>++(i--)</code> 之后，这个表达式是不是合法的呢？通过上面的分析我们知道，前置递增（递减）运算符的操作对象是一个左值，后置递增（递减）运算符的操作对象是一个右值，但是 <code>i--</code> 这个表达式是一个右值，而前置递增（递减）运算符的操作对象是一个左值，所以，<code>++(i--)</code> 这个表达式是不合法的。</p>
 <p>通过以上的分析我相信对于 C++ 中的左值和右值能有一个深刻地理解了，其实说到底就一句话，这里最后再强调一下： <strong>可以对这个表达式运行结束之后取得持久的地址的时候，说明这个表达式是一个左值，否则是一个右值</strong>。</p>
 <p>PS: 以上内容系原创，转载请注明地址</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2014/05/04/2014/05-04-c++-unsigned-transfer/" class="prev">上一篇</a><a href="/2014/04/24/2014/04-24-algorithms-kth/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+</div></article></div></main><footer><div class="paginator"><a href="/2014/05/04/2014/05-04-c++-unsigned-transfer/" class="prev">PREV</a><a href="/2014/04/24/2014/04-24-algorithms-kth/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
 var disqus_identifier = '2014/04/27/2014/04-27-c++-left-right/';
 var disqus_title = 'C++ 中左值与右值的探讨';
 var disqus_url = 'http://blog.keeplearning.group/2014/04/27/2014/04-27-c++-left-right/';
