@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.keeplearning.group/"/>
-  <updated>2018-11-15T07:29:55.350Z</updated>
+  <updated>2018-11-15T13:44:45.426Z</updated>
   <id>http://blog.keeplearning.group/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PyTorch 学习笔记（五）</title>
+    <link href="http://blog.keeplearning.group/2018/11/15/2018/11-15-pytorch5/"/>
+    <id>http://blog.keeplearning.group/2018/11/15/2018/11-15-pytorch5/</id>
+    <published>2018-11-15T11:57:00.000Z</published>
+    <updated>2018-11-15T13:44:45.426Z</updated>
+    
+    <content type="html"><![CDATA[<p>1 . 通过 <code>tensor.view</code> 方法可以调整 tensor 的形状，但必须保证调整前后元素总数一致，返回的新 tensor 与源 tensor 共享内存，即更改其中一个，另一个也会跟着改变。  </p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = t.arange(<span class="number">0</span>, <span class="number">6</span>)</span><br><span class="line">print(a.view(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当某一维为 -1 时，会自动计算它的大小</span></span><br><span class="line">b = a.view(<span class="number">-1</span>, <span class="number">3</span>)</span><br><span class="line">print(b.shape)</span><br></pre></td></tr></table></figure><a id="more"></a>  <p>2 . 在实际应用中可能需要添加或减少某一维度，这时 <code>squeeze</code> 和 <code>unsqueeze</code> 两个函数就派上用场了。  </p><p>Input:  </p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch <span class="keyword">as</span> t</span><br><span class="line"></span><br><span class="line">a = t.arange(<span class="number">0</span>, <span class="number">6</span>)</span><br><span class="line">b = a.view(<span class="number">-1</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">print(b)</span><br><span class="line">print(b.shape)</span><br><span class="line"></span><br><span class="line">print(b.unsqueeze(<span class="number">1</span>))  <span class="comment"># 在第 1 维（下标从 0 开始）上增加 "1"</span></span><br><span class="line"><span class="comment"># 等价于 b[:,None]</span></span><br><span class="line">print(b[:, <span class="keyword">None</span>].shape)</span><br><span class="line"></span><br><span class="line">print(b.unsqueeze(<span class="number">-2</span>))  <span class="comment"># -2 表示倒数第二个维度</span></span><br><span class="line"></span><br><span class="line">c = b.view(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">print(c)</span><br><span class="line">print(c.squeeze(<span class="number">0</span>))   <span class="comment"># 压缩第 0 维的 "1"</span></span><br><span class="line"></span><br><span class="line">print(c.squeeze())   <span class="comment"># 把所有维度为 "1" 的都压缩掉</span></span><br><span class="line"></span><br><span class="line">a[<span class="number">1</span>] = <span class="number">100</span></span><br><span class="line">print(b)   <span class="comment"># b 作为 view 之后的也跟着被修改</span></span><br></pre></td></tr></table></figure><p>Output:  </p><p><img src="http://wx3.sinaimg.cn/mw690/79225320gy1fx92fwjyk7j213s0icgmx.jpg" alt="">  </p><p>3 . <code>resize</code> 是另一种可用来调整 <code>size</code> 的方法，但是与 <code>view</code> 不同，它可以修改 tensor 的大小，如果新大小超过了原大小，会自动分配新的存储空间，而如果新大小小于原大小，则之前的数据依旧会被保存。  </p><p>Input:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch <span class="keyword">as</span> t</span><br><span class="line"></span><br><span class="line">b = t.arange(<span class="number">0</span>, <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">b.resize_(<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line">b.resize_(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure><p>Output:  </p><p><img src="http://wx4.sinaimg.cn/mw690/79225320ly1fx92noka8jj214404udfy.jpg" alt=""></p><hr><p>笔记来源：<a href="https://github.com/chenyuntc/pytorch-book" target="_blank" rel="noopener">《pytorch-book》</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1 . 通过 &lt;code&gt;tensor.view&lt;/code&gt; 方法可以调整 tensor 的形状，但必须保证调整前后元素总数一致，返回的新 tensor 与源 tensor 共享内存，即更改其中一个，另一个也会跟着改变。  &lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;a = t.arange(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;print(a.view(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 当某一维为 -1 时，会自动计算它的大小&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;b = a.view(&lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;print(b.shape)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="编程语言" scheme="http://blog.keeplearning.group/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="PyTorch" scheme="http://blog.keeplearning.group/tags/PyTorch/"/>
+    
+  </entry>
   
   <entry>
     <title>PyTorch 学习笔记（四）</title>
@@ -479,30 +502,6 @@
     
     
       <category term="Python" scheme="http://blog.keeplearning.group/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vim 中 indentLine 插件修改对齐字符</title>
-    <link href="http://blog.keeplearning.group/2016/08/28/2016/08-28-vim-indentline/"/>
-    <id>http://blog.keeplearning.group/2016/08/28/2016/08-28-vim-indentline/</id>
-    <published>2016-08-28T02:00:00.000Z</published>
-    <updated>2018-11-07T07:12:22.435Z</updated>
-    
-    <content type="html"><![CDATA[<p>完整的 Vim 配置教程请参阅我的博文：<a href="http://blog.qiyexuxu.com/2016/08/23/2016-08-23-vim-conf/" target="_blank" rel="noopener">Vim 开发环境配置</a>，下面是这篇博文的补充内容。</p><hr><p>正如 indentLine 的 <a href="https://github.com/Yggdroot/indentLine" target="_blank" rel="noopener">GitHub 主页</a> 上说的那样子，要自定义对齐字符，首先要下载安装 <a href="http://fontforge.github.io/en-US/" target="_blank" rel="noopener">FontForge</a>，Mac 下在安装之前需要首先安装 <a href="https://www.xquartz.org/" target="_blank" rel="noopener">XQuartz</a>，这两个软件都安装完成之后，按照官方所说的步骤操作如下：（将 Vim 原来使用的那个字体卸载掉，譬如我原来用的是 Monaco for Powerline，然后在网上重新把这个字体下载下来，经过下列操作后再重新安装新生成的字体）</p><a id="more"></a><blockquote><ol><li>Download and install FontForge.</li><li>Locate and open your terminal/gVim font.</li><li>Open the font in FontForge, choose <strong>Goto</strong> from the <strong>View</strong> menu and select <em>Private Use Area</em> from the drop down box.</li><li>In the private use area, locate a blank spot for the glyph. Make a note of the code, e.g. <code>U+E0A3</code>.</li><li>Double-click the selected code point to open the font drawing tool.</li><li>From the <strong>File</strong> menu, select <strong>Import…</strong> and locate the <em>indentLine-dotted-guide.eps</em> file.</li><li>Once imported, choose <strong>File</strong> -&gt; <strong>Generate Fonts</strong> and choose a location and file type for the new font.</li></ol></blockquote><p>在以上步骤中，可能会出现警告让你在 FontForge 的菜单栏中依次点击 <code>Element -&gt; Font Info... -&gt; General</code> 来修改 <code>Em Size</code> 的值为 <code>1000</code>，按它说的做。</p><p>在以上步骤中，生成字体的时候，选择以下字体类型：</p><p><img src="http://wx3.sinaimg.cn/mw690/79225320gy1fel4mcvqwhj20lc0xp4oa.jpg" alt="生成的字体类型"></p><p>找到新生成的字体并将其安装到系统中，修改 .vimrc 文件，将字体设置成刚才安装的新字体。用 FontForge 打开新生成的字体，找到你在步骤 6 中 import 的符号，右击，然后依次选择 <code>Glyph Info... -&gt; Unicode</code>，复制下面红色方框的内容：</p><p><img src="http://wx2.sinaimg.cn/mw690/79225320gy1fel4obb6q8j20rq0min2v.jpg" alt="复制该内容"></p><p>在 .vimrc 文件中，删除原来语句  <code>let g:indentLine_char = &#39;&#39;</code>  中单引号的内容（如果没有这条语句的话请新建它），将以上复制好的红色方框中的内容粘贴到单引号内，保存，重启 Vim，其缩进符号就可以得到下面这种使用 Patched font 的效果：</p><p><img src="http://wx2.sinaimg.cn/mw690/79225320gy1fel4qejk5sj20sg0ibwnv.jpg" alt="From https://github.com/Yggdroot/indentLine"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;完整的 Vim 配置教程请参阅我的博文：&lt;a href=&quot;http://blog.qiyexuxu.com/2016/08/23/2016-08-23-vim-conf/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Vim 开发环境配置&lt;/a&gt;，下面是这篇博文的补充内容。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;正如 indentLine 的 &lt;a href=&quot;https://github.com/Yggdroot/indentLine&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub 主页&lt;/a&gt; 上说的那样子，要自定义对齐字符，首先要下载安装 &lt;a href=&quot;http://fontforge.github.io/en-US/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;FontForge&lt;/a&gt;，Mac 下在安装之前需要首先安装 &lt;a href=&quot;https://www.xquartz.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;XQuartz&lt;/a&gt;，这两个软件都安装完成之后，按照官方所说的步骤操作如下：（将 Vim 原来使用的那个字体卸载掉，譬如我原来用的是 Monaco for Powerline，然后在网上重新把这个字体下载下来，经过下列操作后再重新安装新生成的字体）&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="开发工具" scheme="http://blog.keeplearning.group/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Vim" scheme="http://blog.keeplearning.group/tags/Vim/"/>
     
   </entry>
   
