@@ -1,0 +1,79 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> PyTorch 学习笔记（四） · Qiyexuxu</title><meta name="description" content="PyTorch 学习笔记（四） - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">PyTorch 学习笔记（四）</h1><div class="tags"><a href="/tags/PyTorch/" class="tag-title">#PyTorch</a></div><div class="post-info">Nov 15, 2018</div><div class="post-content"><p>1 . 从接口的角度来讲，对 tensor 的操作可分为两类：</p>
+<ul>
+<li><code>torch.function</code>，如 <code>torch.save</code> 等；</li>
+<li>另一类是 <code>tensor.function</code>，如 <code>tensor.view</code> 等。</li>
+</ul>
+<p>为了方便使用，对 tensor 的大部分操作同时支持这两类接口，如 <code>torch.sum(torch.sum(a, b))</code> 与 <code>tensor.sum(a.sum(b))</code> 功能等价。</p>
+<a id="more"></a>
+<p>2 . 在 Pytorch 中新建 tensor 的方法具体有很多，如下表：  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>Tensor(*sizes)</code></td>
+<td style="text-align:center">基础构造函数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>tensor(data)</code></td>
+<td style="text-align:center">类似 <code>np.array</code> 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>ones(*sizes)</code></td>
+<td style="text-align:center">全 1 Tensor</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>zeros(*sizes)</code></td>
+<td style="text-align:center">全 0  Tensor</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>eye(*sizes)</code></td>
+<td style="text-align:center">对角线为 1，其他为 0</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>arange(s, e, steps)</code></td>
+<td style="text-align:center">从 s  到 e，步长为 step</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>linspace(s, e, steps)</code></td>
+<td style="text-align:center">从 s 到 e，均匀切分成 steps 份</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>rand/randn(*sizes)</code></td>
+<td style="text-align:center">均匀/标准分布</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>normal(mean, std)/uniform(from, to)</code></td>
+<td style="text-align:center">正态分布/均匀分布</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>randperm(m)</code></td>
+<td style="text-align:center">随机排列</td>
+</tr>
+</tbody>
+</table>
+<p>这些创建方法都可以在创建的时候指定数据类型 <code>dtype</code> 和存放 device(cpu/gpu)。　　</p>
+<p>Input:  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch <span class="keyword">as</span> t</span><br><span class="line"></span><br><span class="line">a = t.Tensor(<span class="number">2</span>, <span class="number">3</span>)   <span class="comment"># 指定 tensor 的形状，其数值取决于内存空间的状态，print 的时候可能 overflow</span></span><br><span class="line"></span><br><span class="line">b = t.Tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])   <span class="comment"># 用 list 的数据创建 tensor</span></span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line">print(b.tolist())  <span class="comment"># 把 tensor 转为 list</span></span><br><span class="line"></span><br><span class="line">b_size = b.size()</span><br><span class="line">print(b_size)</span><br><span class="line"></span><br><span class="line">print(b.numel())   <span class="comment"># 返回 b 中元素总个数，等价于 b.nelement()</span></span><br><span class="line"></span><br><span class="line">c = t.Tensor(b_size)   <span class="comment"># 创建一个和 b 形状一样的 tensor</span></span><br><span class="line">d = t.Tensor((<span class="number">2</span>, <span class="number">3</span>))   <span class="comment"># 创建一个元素为 2 和 3 的 tensor</span></span><br><span class="line"></span><br><span class="line">print(c.shape)    <span class="comment"># 与 c.size() 等价</span></span><br></pre></td></tr></table></figure>
+<p>Output:  </p>
+<p><img src="http://wx1.sinaimg.cn/mw690/79225320ly1fx8r4lflf0j214i06o74m.jpg" alt="">  </p>
+<p><code>t.Tensor(*sizes)</code>　创建 tensor 时，系统不会马上分配空间，只会计算剩余的内存是否足够使用，使用到 tensor 时才会分配，而其他操作都是在创建完 tensor 之后马上进行空间分配。  </p>
+<p>Input:  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch <span class="keyword">as</span> t</span><br><span class="line"></span><br><span class="line">print(t.ones(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">print(t.zeros(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">print(t.arange(<span class="number">1</span>, <span class="number">6</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">print(t.linspace(<span class="number">1</span>, <span class="number">10</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">print(t.randn(<span class="number">2</span>, <span class="number">3</span>, device=t.device(<span class="string">'cpu'</span>)))</span><br><span class="line"></span><br><span class="line">print(t.randperm(<span class="number">5</span>))    <span class="comment"># 长度为 5 的随机排列</span></span><br><span class="line"></span><br><span class="line">print(t.eye(<span class="number">2</span>, <span class="number">3</span>, dtype=t.int))  <span class="comment"># 对角线为 1，不要求行数与列数一致</span></span><br><span class="line"></span><br><span class="line">scalar = t.tensor(<span class="number">3.14159</span>)</span><br><span class="line">print(<span class="string">'scalar: %s, shape of scalar: %s'</span> % (scalar, scalar.shape))</span><br><span class="line"></span><br><span class="line">vector = t.tensor([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">print(<span class="string">'vector: %s, shape of vector: %s'</span> % (vector, vector.shape))</span><br><span class="line"></span><br><span class="line">tensor = t.Tensor(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">print(tensor.shape)</span><br><span class="line"></span><br><span class="line">matrix = t.tensor([[<span class="number">0.1</span>, <span class="number">1.2</span>], [<span class="number">2.2</span>, <span class="number">3.1</span>], [<span class="number">4.9</span>, <span class="number">5.2</span>]])</span><br><span class="line">print(matrix)</span><br><span class="line">print(matrix.shape)</span><br><span class="line"></span><br><span class="line">ten = t.tensor([[<span class="number">0.11111</span>, <span class="number">0.22222</span>, <span class="number">0.33333</span>]], dtype=t.float64, device=t.device(<span class="string">'cpu'</span>))</span><br><span class="line">print(ten)</span><br><span class="line"></span><br><span class="line">empty_tensor = t.tensor([])</span><br><span class="line">print(empty_tensor.shape)</span><br></pre></td></tr></table></figure>
+<p>Output:  </p>
+<p><img src="http://wx3.sinaimg.cn/mw690/79225320gy1fx8rusct9tj214h0kkgo1.jpg" alt="">  </p>
+<hr>
+<p>笔记来源：<a href="https://github.com/chenyuntc/pytorch-book" target="_blank" rel="noopener">《pytorch-book》</a></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/11/14/2018/11-14-pytorch3/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+var disqus_identifier = '2018/11/15/2018/11-15-pytorch4/';
+var disqus_title = 'PyTorch 学习笔记（四）';
+var disqus_url = 'http://blog.keeplearning.group/2018/11/15/2018/11-15-pytorch4/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//abnerwang.disqus.com/count.js" async></script><div class="copyright"><p>© 2014 - 2018 <a href="http://blog.keeplearning.group">David Wang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

@@ -2,23 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.keeplearning.group/2018/11/14/2018/11-14-batch_size/</loc>
+    <loc>http://blog.keeplearning.group/2018/11/15/2018/11-15-pytorch4/</loc>
     
-    <lastmod>2018-11-14T13:20:55.832Z</lastmod>
+    <lastmod>2018-11-15T07:29:55.350Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.keeplearning.group/2018/11/14/2018/11-14-pytorch3/</loc>
+    
+    <lastmod>2018-11-15T07:27:43.840Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/14/2018/11-14-pytorch2/</loc>
     
-    <lastmod>2018-11-14T12:45:26.334Z</lastmod>
+    <lastmod>2018-11-15T06:37:55.283Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/14/2018/11-14-pytorch1/</loc>
     
-    <lastmod>2018-11-14T12:45:10.798Z</lastmod>
+    <lastmod>2018-11-15T06:37:38.251Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.keeplearning.group/2018/11/14/2018/11-14-batch_size/</loc>
+    
+    <lastmod>2018-11-14T13:20:55.832Z</lastmod>
     
   </url>
   
