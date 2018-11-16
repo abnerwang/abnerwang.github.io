@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.keeplearning.group/2018/11/16/2018/11-16-pytorch6/</loc>
+    
+    <lastmod>2018-11-16T07:15:13.828Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.keeplearning.group/2018/11/15/2018/11-15-pytorch5/</loc>
     
     <lastmod>2018-11-15T13:44:45.426Z</lastmod>
