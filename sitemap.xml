@@ -2,534 +2,541 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.keeplearning.group/2018/11/17/2018/11-17-pytorch10/</loc>
+    
+    <lastmod>2018-11-17T14:22:50.838Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.keeplearning.group/2018/11/17/2018/11-17-pytorch9/</loc>
     
-    <lastmod>2018-11-17T09:14:14.043Z</lastmod>
+    <lastmod>2018-11-17T09:14:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/17/2018/11-17-pytorch8/</loc>
     
-    <lastmod>2018-11-17T04:27:26.000Z</lastmod>
+    <lastmod>2018-11-17T04:27:26.035Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/16/2018/11-16-momentum/</loc>
     
-    <lastmod>2018-11-17T01:29:47.000Z</lastmod>
+    <lastmod>2018-11-17T01:29:47.331Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/16/2018/11-16-pytorch7/</loc>
     
-    <lastmod>2018-11-16T13:18:07.000Z</lastmod>
+    <lastmod>2018-11-16T13:18:07.473Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/16/2018/11-16-pytorch6/</loc>
     
-    <lastmod>2018-11-16T07:15:13.828Z</lastmod>
+    <lastmod>2018-11-16T07:15:13.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/15/2018/11-15-pytorch5/</loc>
     
-    <lastmod>2018-11-15T13:44:45.426Z</lastmod>
+    <lastmod>2018-11-15T13:44:45.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/15/2018/11-15-pytorch4/</loc>
     
-    <lastmod>2018-11-15T07:29:55.350Z</lastmod>
+    <lastmod>2018-11-15T07:29:55.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/14/2018/11-14-pytorch3/</loc>
     
-    <lastmod>2018-11-15T07:27:43.840Z</lastmod>
+    <lastmod>2018-11-15T07:27:43.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/14/2018/11-14-pytorch2/</loc>
     
-    <lastmod>2018-11-15T06:37:55.283Z</lastmod>
+    <lastmod>2018-11-15T06:37:55.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/14/2018/11-14-pytorch1/</loc>
     
-    <lastmod>2018-11-15T06:37:38.251Z</lastmod>
+    <lastmod>2018-11-15T06:37:38.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/14/2018/11-14-batch_size/</loc>
     
-    <lastmod>2018-11-14T13:20:55.832Z</lastmod>
+    <lastmod>2018-11-14T13:20:55.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2017/07/18/2017/07-18-half-life/</loc>
     
-    <lastmod>2018-11-07T08:37:44.324Z</lastmod>
+    <lastmod>2018-11-07T08:37:44.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2017/07/21/2017/07-21-ai-bigdata/</loc>
     
-    <lastmod>2018-11-07T08:33:34.103Z</lastmod>
+    <lastmod>2018-11-07T08:33:34.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2017/07/22/2017/07-22-ai-bigdata/</loc>
     
-    <lastmod>2018-11-07T08:32:48.975Z</lastmod>
+    <lastmod>2018-11-07T08:32:48.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2017/07/23/2017/07-23-ai-bigdata/</loc>
     
-    <lastmod>2018-11-07T08:31:08.833Z</lastmod>
+    <lastmod>2018-11-07T08:31:08.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2017/07/31/2017/07-31-learn-program/</loc>
     
-    <lastmod>2018-11-07T08:29:37.722Z</lastmod>
+    <lastmod>2018-11-07T08:29:37.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/about/index.html</loc>
     
-    <lastmod>2018-11-07T07:44:41.377Z</lastmod>
+    <lastmod>2018-11-07T07:44:41.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/23/2016/08-23-vim-conf/</loc>
     
-    <lastmod>2018-11-07T07:42:12.113Z</lastmod>
+    <lastmod>2018-11-07T07:42:12.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/06/30/2014/06-30-algorithms-max-subseq/</loc>
     
-    <lastmod>2018-11-07T07:23:09.329Z</lastmod>
+    <lastmod>2018-11-07T07:23:09.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/06/30/2014/06-30-algorithms-recursion-rules/</loc>
     
-    <lastmod>2018-11-07T07:22:58.029Z</lastmod>
+    <lastmod>2018-11-07T07:22:58.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/08/27/2014/08-27-vim-notes1/</loc>
     
-    <lastmod>2018-11-07T07:22:44.625Z</lastmod>
+    <lastmod>2018-11-07T07:22:44.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/08/29/2014/08-29-vim-notes2/</loc>
     
-    <lastmod>2018-11-07T07:22:26.757Z</lastmod>
+    <lastmod>2018-11-07T07:22:26.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/05/31/2014/05-31-c++-deal-string/</loc>
     
-    <lastmod>2018-11-07T07:21:59.565Z</lastmod>
+    <lastmod>2018-11-07T07:21:59.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/05/24/2014/05-24-algorithms-recursion/</loc>
     
-    <lastmod>2018-11-07T07:21:46.837Z</lastmod>
+    <lastmod>2018-11-07T07:21:46.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/05/23/2014/05-23-c++-left-value/</loc>
     
-    <lastmod>2018-11-07T07:21:37.589Z</lastmod>
+    <lastmod>2018-11-07T07:21:37.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/05/21/2014/05-21-c++-range-for/</loc>
     
-    <lastmod>2018-11-07T07:21:27.077Z</lastmod>
+    <lastmod>2018-11-07T07:21:27.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/05/20/2014/05-20-c++-two/</loc>
     
-    <lastmod>2018-11-07T07:21:07.501Z</lastmod>
+    <lastmod>2018-11-07T07:21:07.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/05/13/2014/05-13-android-mac/</loc>
     
-    <lastmod>2018-11-07T07:20:56.229Z</lastmod>
+    <lastmod>2018-11-07T07:20:56.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/05/12/2014/05-12-c++-array-fpointer/</loc>
     
-    <lastmod>2018-11-07T07:20:44.228Z</lastmod>
+    <lastmod>2018-11-07T07:20:44.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/05/06/2014/05-06-c++-const/</loc>
     
-    <lastmod>2018-11-07T07:20:30.308Z</lastmod>
+    <lastmod>2018-11-07T07:20:30.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/05/04/2014/05-04-c++-unsigned-transfer/</loc>
     
-    <lastmod>2018-11-07T07:20:15.964Z</lastmod>
+    <lastmod>2018-11-07T07:20:15.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/04/27/2014/04-27-c++-left-right/</loc>
     
-    <lastmod>2018-11-07T07:20:06.380Z</lastmod>
+    <lastmod>2018-11-07T07:20:06.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/04/24/2014/04-24-algorithms-kth/</loc>
     
-    <lastmod>2018-11-07T07:19:54.948Z</lastmod>
+    <lastmod>2018-11-07T07:19:54.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/04/19/2014/04-19-c++-vector/</loc>
     
-    <lastmod>2018-11-07T07:19:45.300Z</lastmod>
+    <lastmod>2018-11-07T07:19:45.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/04/19/2014/04-19-c++-string&c/</loc>
     
-    <lastmod>2018-11-07T07:19:32.107Z</lastmod>
+    <lastmod>2018-11-07T07:19:32.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/04/19/2014/04-19-c++-array-pointer/</loc>
     
-    <lastmod>2018-11-07T07:19:21.355Z</lastmod>
+    <lastmod>2018-11-07T07:19:21.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/04/18/2014/04-18-c++-iterator/</loc>
     
-    <lastmod>2018-11-07T07:19:12.060Z</lastmod>
+    <lastmod>2018-11-07T07:19:12.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/04/16/2014/04-16-emacs-conf/</loc>
     
-    <lastmod>2018-11-07T07:19:02.068Z</lastmod>
+    <lastmod>2018-11-07T07:19:02.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/04/06/2014/04-06-c++-literal-string/</loc>
     
-    <lastmod>2018-11-07T07:18:50.492Z</lastmod>
+    <lastmod>2018-11-07T07:18:50.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/04/02/2014/04-02-c++-head-file/</loc>
     
-    <lastmod>2018-11-07T07:18:35.973Z</lastmod>
+    <lastmod>2018-11-07T07:18:35.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/03/31/2014/03-31-c++-processing-type%20copy/</loc>
     
-    <lastmod>2018-11-07T07:18:23.985Z</lastmod>
+    <lastmod>2018-11-07T07:18:23.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/03/27/2014/03-27-c++-void-pointer/</loc>
     
-    <lastmod>2018-11-07T07:18:10.382Z</lastmod>
+    <lastmod>2018-11-07T07:18:10.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/03/12/2014/03-12-c++-escape-seq/</loc>
     
-    <lastmod>2018-11-07T07:17:56.326Z</lastmod>
+    <lastmod>2018-11-07T07:17:56.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/03/07/2014/03-07-c++-unsigend-exp/</loc>
     
-    <lastmod>2018-11-07T07:17:47.119Z</lastmod>
+    <lastmod>2018-11-07T07:17:47.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/03/07/2014/03-07-c++-types/</loc>
     
-    <lastmod>2018-11-07T07:17:36.343Z</lastmod>
+    <lastmod>2018-11-07T07:17:36.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/03/06/2014/03-06-c++-signed-to-unsigned/</loc>
     
-    <lastmod>2018-11-07T07:17:26.151Z</lastmod>
+    <lastmod>2018-11-07T07:17:26.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/03/06/2014/03-06-c++-errors/</loc>
     
-    <lastmod>2018-11-07T07:17:15.256Z</lastmod>
+    <lastmod>2018-11-07T07:17:15.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/03/01/2014/03-01-c++-input/</loc>
     
-    <lastmod>2018-11-07T07:17:05.745Z</lastmod>
+    <lastmod>2018-11-07T07:17:05.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/02/11/2014/02-11-c++-iostream/</loc>
     
-    <lastmod>2018-11-07T07:16:53.397Z</lastmod>
+    <lastmod>2018-11-07T07:16:53.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2014/02/09/2014/02-09-why-blog/</loc>
     
-    <lastmod>2018-11-07T07:16:40.390Z</lastmod>
+    <lastmod>2018-11-07T07:16:40.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2015/03/16/2015/03-16-c-Fahrenheit-Celsius/</loc>
     
-    <lastmod>2018-11-07T07:16:23.323Z</lastmod>
+    <lastmod>2018-11-07T07:16:23.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2015/03/16/2015/03-16-c-why-celsius/</loc>
     
-    <lastmod>2018-11-07T07:16:12.940Z</lastmod>
+    <lastmod>2018-11-07T07:16:12.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2015/03/18/2015/03-18-c-why-int/</loc>
     
-    <lastmod>2018-11-07T07:16:03.973Z</lastmod>
+    <lastmod>2018-11-07T07:16:03.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2015/03/27/2015/03-27-c-why-n=16%EF%80%A1n+hexdigit/</loc>
     
-    <lastmod>2018-11-07T07:15:48.674Z</lastmod>
+    <lastmod>2018-11-07T07:15:48.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2015/03/30/2015/03-30-c-word-length/</loc>
     
-    <lastmod>2018-11-07T07:15:34.215Z</lastmod>
+    <lastmod>2018-11-07T07:15:34.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2015/12/04/2015/12-04-algorithms-bitree-level-traverse/</loc>
     
-    <lastmod>2018-11-07T07:15:20.225Z</lastmod>
+    <lastmod>2018-11-07T07:15:20.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/23/2016/04-25-algorithms-if-prime-number/</loc>
     
-    <lastmod>2018-11-07T07:14:58.523Z</lastmod>
+    <lastmod>2018-11-07T07:14:58.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/01/2016/08-01-wechat-why-wechat/</loc>
     
-    <lastmod>2018-11-07T07:14:46.813Z</lastmod>
+    <lastmod>2018-11-07T07:14:46.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/02/2016/08-02-wechat-google-/</loc>
     
-    <lastmod>2018-11-07T07:14:36.658Z</lastmod>
+    <lastmod>2018-11-07T07:14:36.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/06/2016/08-06-wechat-family-env/</loc>
     
-    <lastmod>2018-11-07T07:14:22.208Z</lastmod>
+    <lastmod>2018-11-07T07:14:22.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/24/2016/08-24-Python-notes1/</loc>
     
-    <lastmod>2018-11-07T07:13:49.442Z</lastmod>
+    <lastmod>2018-11-07T07:13:49.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/25/2016/08-25-Python-notes2/</loc>
     
-    <lastmod>2018-11-07T07:13:39.776Z</lastmod>
+    <lastmod>2018-11-07T07:13:39.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/25/2016/08-25-Python-notes3/</loc>
     
-    <lastmod>2018-11-07T07:13:27.507Z</lastmod>
+    <lastmod>2018-11-07T07:13:27.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/25/2016/08-25-Python-notes4/</loc>
     
-    <lastmod>2018-11-07T07:13:14.302Z</lastmod>
+    <lastmod>2018-11-07T07:13:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/26/2016/08-26-Python-notes5/</loc>
     
-    <lastmod>2018-11-07T07:13:03.797Z</lastmod>
+    <lastmod>2018-11-07T07:13:03.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/26/2016/08-26-Python-notes6/</loc>
     
-    <lastmod>2018-11-07T07:12:51.725Z</lastmod>
+    <lastmod>2018-11-07T07:12:51.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/28/2016/08-28-python-notes7/</loc>
     
-    <lastmod>2018-11-07T07:12:36.514Z</lastmod>
+    <lastmod>2018-11-07T07:12:36.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/28/2016/08-28-vim-indentline/</loc>
     
-    <lastmod>2018-11-07T07:12:22.435Z</lastmod>
+    <lastmod>2018-11-07T07:12:22.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/08/29/2016/08-29-python-notes8/</loc>
     
-    <lastmod>2018-11-07T07:12:06.290Z</lastmod>
+    <lastmod>2018-11-07T07:12:06.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/09/19/2016/09-19-python-notes9/</loc>
     
-    <lastmod>2018-11-07T07:11:47.919Z</lastmod>
+    <lastmod>2018-11-07T07:11:47.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/09/28/2016/09-28-python-notes10/</loc>
     
-    <lastmod>2018-11-07T07:11:34.650Z</lastmod>
+    <lastmod>2018-11-07T07:11:34.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2016/09/29/2016/09-29-python-virtualenv/</loc>
     
-    <lastmod>2018-11-07T07:11:20.486Z</lastmod>
+    <lastmod>2018-11-07T07:11:20.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2017/01/18/2017/01-18-python-iterable/</loc>
     
-    <lastmod>2018-11-07T07:11:07.567Z</lastmod>
+    <lastmod>2018-11-07T07:11:07.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2017/01/21/2017/01-21-python-yield&deque/</loc>
     
-    <lastmod>2018-11-07T07:10:54.800Z</lastmod>
+    <lastmod>2018-11-07T07:10:54.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2017/01/22/2017/01-22-python-heapq&lambda/</loc>
     
-    <lastmod>2018-11-07T07:10:41.483Z</lastmod>
+    <lastmod>2018-11-07T07:10:41.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2017/04/17/2017/04-15-hejiuhaojie/</loc>
     
-    <lastmod>2018-11-07T07:10:30.578Z</lastmod>
+    <lastmod>2018-11-07T07:10:30.000Z</lastmod>
     
   </url>
   
