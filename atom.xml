@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.keeplearning.group/"/>
-  <updated>2018-11-17T01:24:50.669Z</updated>
+  <updated>2018-11-17T01:29:47.331Z</updated>
   <id>http://blog.keeplearning.group/</id>
   
   <author>
@@ -21,14 +21,14 @@
     <link href="http://blog.keeplearning.group/2018/11/16/2018/11-16-momentum/"/>
     <id>http://blog.keeplearning.group/2018/11/16/2018/11-16-momentum/</id>
     <published>2018-11-16T13:39:00.000Z</published>
-    <updated>2018-11-17T01:24:50.669Z</updated>
+    <updated>2018-11-17T01:29:47.331Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h1><p>随机梯度下降（SGD）方法的一个缺点是其更新方向完全依赖于当前 batch 计算出的梯度，因而十分不稳定，Momentum 算法借用了物理中的动量概念，它模拟的是物体运动时的惯性，即更新的时候在一定程度上保留之前更新的方向，同时利用当前 batch 的梯度微调最终的更新方向，这样一来，可以在一定程度上增加稳定性，从而学习得更快，并且还有一定摆脱局部最优的能力。数学表达式如下：  </p><p>$$v_{t}=\gamma v_{t-1}+\alpha \cdot \nabla_{\theta }J(\theta)$$  $$\theta:=\theta -v_{t}$$  </p><p>Momentum 算法会观察历史梯度 $v_{t-1}$，若当前梯度的方向与历史梯度一致，表明当前样本不太可能为异常点，则会增强这个方向的梯度，若当前梯度与历史梯度方向不一致，则梯度会衰减。<br><a id="more"></a></p><h1 id="Nesterov-Momentum"><a href="#Nesterov-Momentum" class="headerlink" title="Nesterov Momentum"></a>Nesterov Momentum</h1><p>在小球向下滚的过程中，我们希望小球能够提前知道在哪些方向坡面会上升，这样在遇到上升坡面之前，小球就开始减速，这方法就是 Nesterov Momentum，其在凸优化中有较强的理论保证收敛，并且，在实践中 Nesterov Momentum 也要比单纯的 Momentum 的效果好。数学表达式如下：  </p><p>$$v_{t}=\gamma v_{t-1} + \alpha \cdot \nabla_{\theta}J(\theta-\gamma v_{t-1})$$  $$\theta:=\theta-v_{t}$$  </p>]]></content>
+    <content type="html"><![CDATA[<h2 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h2><p>随机梯度下降（SGD）方法的一个缺点是其更新方向完全依赖于当前 batch 计算出的梯度，因而十分不稳定，Momentum 算法借用了物理中的动量概念，它模拟的是物体运动时的惯性，即更新的时候在一定程度上保留之前更新的方向，同时利用当前 batch 的梯度微调最终的更新方向，这样一来，可以在一定程度上增加稳定性，从而学习得更快，并且还有一定摆脱局部最优的能力。数学表达式如下：  </p><p>$$v_{t}=\gamma v_{t-1}+\alpha \cdot \nabla_{\theta }J(\theta)$$  $$\theta=\theta -v_{t}$$  </p><p>Momentum 算法会观察历史梯度 $v_{t-1}$，若当前梯度的方向与历史梯度一致，表明当前样本不太可能为异常点，则会增强这个方向的梯度，若当前梯度与历史梯度方向不一致，则梯度会衰减。<br><a id="more"></a></p><h2 id="Nesterov-Momentum"><a href="#Nesterov-Momentum" class="headerlink" title="Nesterov Momentum"></a>Nesterov Momentum</h2><p>在小球向下滚的过程中，我们希望小球能够提前知道在哪些方向坡面会上升，这样在遇到上升坡面之前，小球就开始减速，这方法就是 Nesterov Momentum，其在凸优化中有较强的理论保证收敛，并且，在实践中 Nesterov Momentum 也要比单纯的 Momentum 的效果好。数学表达式如下：  </p><p>$$v_{t}=\gamma v_{t-1} + \alpha \cdot \nabla_{\theta}J(\theta-\gamma v_{t-1})$$  $$\theta=\theta-v_{t}$$  </p>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Momentum&quot;&gt;&lt;a href=&quot;#Momentum&quot; class=&quot;headerlink&quot; title=&quot;Momentum&quot;&gt;&lt;/a&gt;Momentum&lt;/h1&gt;&lt;p&gt;随机梯度下降（SGD）方法的一个缺点是其更新方向完全依赖于当前 batch 计算出的梯度，因而十分不稳定，Momentum 算法借用了物理中的动量概念，它模拟的是物体运动时的惯性，即更新的时候在一定程度上保留之前更新的方向，同时利用当前 batch 的梯度微调最终的更新方向，这样一来，可以在一定程度上增加稳定性，从而学习得更快，并且还有一定摆脱局部最优的能力。数学表达式如下：  &lt;/p&gt;
-&lt;p&gt;$$v_{t}=\gamma v_{t-1}+\alpha \cdot \nabla_{\theta }J(\theta)$$  $$\theta:=\theta -v_{t}$$  &lt;/p&gt;
+      &lt;h2 id=&quot;Momentum&quot;&gt;&lt;a href=&quot;#Momentum&quot; class=&quot;headerlink&quot; title=&quot;Momentum&quot;&gt;&lt;/a&gt;Momentum&lt;/h2&gt;&lt;p&gt;随机梯度下降（SGD）方法的一个缺点是其更新方向完全依赖于当前 batch 计算出的梯度，因而十分不稳定，Momentum 算法借用了物理中的动量概念，它模拟的是物体运动时的惯性，即更新的时候在一定程度上保留之前更新的方向，同时利用当前 batch 的梯度微调最终的更新方向，这样一来，可以在一定程度上增加稳定性，从而学习得更快，并且还有一定摆脱局部最优的能力。数学表达式如下：  &lt;/p&gt;
+&lt;p&gt;$$v_{t}=\gamma v_{t-1}+\alpha \cdot \nabla_{\theta }J(\theta)$$  $$\theta=\theta -v_{t}$$  &lt;/p&gt;
 &lt;p&gt;Momentum 算法会观察历史梯度 $v_{t-1}$，若当前梯度的方向与历史梯度一致，表明当前样本不太可能为异常点，则会增强这个方向的梯度，若当前梯度与历史梯度方向不一致，则梯度会衰减。&lt;br&gt;
     
     </summary>
