@@ -7,7 +7,7 @@
 <p>也就是说，<code>arry[index]</code> 的值就是 <code>*(p + index)</code> ，请注意，不是 <code>*(p + index)</code> 的副本，而是本身就是 <code>*(p + index)</code> ，这二者是同一个对象，而 <code>*(p + index)</code> 本质上就是 <code>ia[index]</code>，即说 <code>arry[index]</code> 本身就是 <code>ia[index]</code> 而非 <code>ia[index]</code> 的副本，所以，<code>arry[index]</code> 并不是一个局部对象，它是一个在被调函数运行之前就已经存在的对象，虽然 arry 是一个局部对象，但是，由它进行下标运算而最后得到的值却不是一个局部对象。</p>
 <p>经过以上分析，我们可以得到以下的结论：</p>
 <p><strong>虽然某个对象是局部对象，但是由它经过下标运算后得到的对象却并不一定是一个局部对象，应该具体问题具体分析。</strong></p>
-</div></article></div></main><footer><div class="paginator"><a href="/2014/05/24/2014/05-24-algorithms-recursion/" class="prev">上一篇</a><a href="/2014/05/21/2014/05-21-c++-range-for/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+</div></article></div></main><footer><div class="paginator"><a href="/2014/05/24/2014/05-24-algorithms-recursion/" class="prev">PREV</a><a href="/2014/05/21/2014/05-21-c++-range-for/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
 var disqus_identifier = '2014/05/23/2014/05-23-c++-left-value/';
 var disqus_title = '引用返回左值及其判断引用有效性的方法';
 var disqus_url = 'http://blog.keeplearning.group/2014/05/23/2014/05-23-c++-left-value/';
