@@ -2,30 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.keeplearning.group/2019/06/19/2019/06-14-naive-bayes/</loc>
+    
+    <lastmod>2019-06-19T12:20:50.341Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.keeplearning.group/2018/11/21/2018/11-21-pytorch16/</loc>
     
-    <lastmod>2018-11-21T02:20:29.049Z</lastmod>
+    <lastmod>2018-11-21T02:20:29.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/20/2018/11-20-pytorch15/</loc>
     
-    <lastmod>2018-11-20T13:19:11.791Z</lastmod>
+    <lastmod>2018-11-20T13:19:11.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/20/2018/11-20-pytorch14/</loc>
     
-    <lastmod>2018-11-20T10:16:55.559Z</lastmod>
+    <lastmod>2018-11-20T10:16:55.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/20/2018/11-20-pytorch13/</loc>
     
-    <lastmod>2018-11-20T04:43:24.967Z</lastmod>
+    <lastmod>2018-11-20T04:43:24.000Z</lastmod>
     
   </url>
   
@@ -46,7 +53,7 @@
   <url>
     <loc>http://blog.keeplearning.group/2018/11/17/2018/11-17-pytorch10/</loc>
     
-    <lastmod>2018-11-17T14:25:57.582Z</lastmod>
+    <lastmod>2018-11-17T14:25:57.000Z</lastmod>
     
   </url>
   
@@ -60,21 +67,21 @@
   <url>
     <loc>http://blog.keeplearning.group/2018/11/17/2018/11-17-pytorch8/</loc>
     
-    <lastmod>2018-11-17T04:27:26.035Z</lastmod>
+    <lastmod>2018-11-17T04:27:26.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/16/2018/11-16-momentum/</loc>
     
-    <lastmod>2018-11-17T01:29:47.331Z</lastmod>
+    <lastmod>2018-11-17T01:29:47.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.keeplearning.group/2018/11/16/2018/11-16-pytorch7/</loc>
     
-    <lastmod>2018-11-16T13:18:07.473Z</lastmod>
+    <lastmod>2018-11-16T13:18:07.000Z</lastmod>
     
   </url>
   
