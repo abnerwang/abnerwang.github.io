@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 朴素贝叶斯算法详解 · Qiyexuxu</title><meta name="description" content="朴素贝叶斯算法详解 - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">朴素贝叶斯算法详解</h1><div class="tags"><a href="/tags/朴素贝叶斯算法/" class="tag-title">#朴素贝叶斯算法</a></div><div class="post-info">Jun 19, 2019</div><div class="post-content"><p>朴素贝叶斯算法主要解决什么问题？它是怎么解决这类问题的？如何证明这种解决方法是有效的？本文将从这三方面详细介绍朴素贝叶斯算法的相关内容。</p>
-<a id="more"></a>
-<h3 id="朴素贝叶斯算法主要解决什么问题"><a href="#朴素贝叶斯算法主要解决什么问题" class="headerlink" title="朴素贝叶斯算法主要解决什么问题"></a>朴素贝叶斯算法主要解决什么问题</h3><p>朴素贝叶斯算法主要用来处理分类问题，也就是说，我们给算法某个对象的输入特征（通常是向量形式），算法能够根据这个输入特征判断含有这种特征的对象属于预先定义的哪一类。我们所熟悉的垃圾邮件分类问题是朴素贝叶斯算法的典型应用场景。为方便下文论述，我们首先对使用朴素贝叶斯算法解决分类问题进行数学建模，设分类问题的输入空间 $\chi \subseteq \mathbb{R}^n$，输出空间 $\mathcal{y} = {c_1, c_2, …, c_K}$，即输入空间定义为 $n$ 维实数向量的子空间，输出空间包含了 $k$ 个预先定义的类别。某一特定问题的输入 $x \in \chi$，输出 $y \in \matchcal{y}$，即朴素贝叶斯算法建立了一个从某个对象提取的特征向量（这里的特征向量和线性代数里面的特征向量是不同的概念，这里指的是能反映该对象特征的向量）到该对象所属类别的一个映射。  </p>
+<h3 id="朴素贝叶斯算法主要解决什么问题"><a href="#朴素贝叶斯算法主要解决什么问题" class="headerlink" title="朴素贝叶斯算法主要解决什么问题"></a>朴素贝叶斯算法主要解决什么问题</h3><p>朴素贝叶斯算法主要用来处理分类问题，也就是说，我们给算法某个对象的输入特征（通常是向量形式），算法能够根据这个输入特征判断含有这种特征的对象属于预先定义的哪一类。我们所熟悉的垃圾邮件分类问题是朴素贝叶斯算法的典型应用场景。为方便下文论述，我们首先对使用朴素贝叶斯算法解决分类问题进行数学建模，设分类问题的输入空间 $\chi \subseteq \mathbb{R}^n$，输出空间 $\mathbb{y} = ${$c_1, c_2, …, c_K$}$ $，即输入空间定义为 $n$ 维实数向量的子空间，输出空间包含了 $K$ 个预先定义的类别。某一特定问题的输入 $x \in \chi$，输出 $y \in \mathbb{y}$，即朴素贝叶斯算法建立了一个从某个对象提取的特征向量（这里的特征向量和线性代数里面的特征向量是不同的概念，这里指的是能反映该对象特征的向量）到该对象所属类别的一个映射。 </p>
+<a id="more"></a> 
 <h3 id="朴素贝叶斯算法如何解决分类问题"><a href="#朴素贝叶斯算法如何解决分类问题" class="headerlink" title="朴素贝叶斯算法如何解决分类问题"></a>朴素贝叶斯算法如何解决分类问题</h3><p>通常，我们可以将机器学习的过程描述为，机器学习算法从一大堆训练数据中学习解决某类问题的通用经验，然后利用学得的经验，对新的未知问题的结果进行预测。对于朴素贝叶斯算法也是如此。我们首先拿到一大堆训练数据，这类数据中包含有一大堆对象的特征向量和标注好的类别标签（监督学习过程）。比如对于垃圾邮件分类问题（二分类问题），我们拿到的训练数据是一大堆标记为垃圾邮件和非垃圾邮件的特征向量，这些特征向量可能是邮件中出现的某些特殊含义的单词（如购买、价格、618活动等），也有可能是这些特殊含义的单词在邮件中出现的次数、每个单词的赋予的权重等。统计机器学习假设数据存在一定的统计规律，也就是说，我们的训练样本和真实世界中的样本是服从于某一个由输入、输出空间组成的联合概率分布并且由这个概率分布独立同分布（IID）产生的。这是统计机器学习的一个基本前提，读者在学习统计机器学习相关内容时一定要注意这个假设。  </p>
 <p>依照这个模式，我们再回过头来看一下朴素贝叶斯算法分类的过程。我们拿到一大堆训练数据，这些训练数据和真实世界中无穷无尽的样本数据之间符合统计机器学习的基本假设前提，即这二者是由特征向量和标签组成的某个联合概率分布独立同分布产生的。如果设 $X$ 为特征向量，$Y$ 为标签向量，则二者的联合概率分布为 $P(X, Y)$，由于训练数据是由联合概率分布 $P(X, Y)$ 产生的，因此理论上我们可以通过训练数据来估计联合概率分布 $P(X,Y)$。而朴素贝叶斯算法要解决的问题是，给定一个提取的特征向量，判断该特征向量所对应的分类对象归属的类别。我们可以将这个过程建模为已知 $P(X, Y)$，求 $P(Y|X)$，对于这个问题，我们自然而然会联想到贝叶斯公式：  </p>
 <p> $$P(Y|X) = \frac {P(X,Y)} {P(X)} = \frac {P(X|Y)P(Y)} {P(X)}$$  </p>
@@ -11,12 +11,49 @@
 <p> 上式中，分母部分与某一个具体的 $c_k$ 无关，因此上式等价于：  </p>
 <p> $$argmax_{c_k}P(Y=c_k|X=x)=argmax_{c_k}{P(X=x|Y=c_k)P(Y=c_k)}$$  </p>
 <p> 对于上式等号右侧，根据极大似然估计或者贝叶斯估计，由训练样本估计先验概率 $P(Y)$ 是简单的，下文我们会详细讲解。但是对于条件概率 $P(X|Y)$ 的估计则非常困难，因为它的参数数量是指数级的，如果特征向量 $x$ 有 n 个分量，即 $x=(x_1, x_2, …, x_n)$，每个分量可能的取值个数为 $s^{(i)} (i=1, 2, …, n)$，分类类别为 $K$ 个，则参数数量为 $K\prod_{i=1}^{n}s^{(i)}$，这种估计极度复杂，实际是不可行的，因此，朴素贝叶斯算法对于条件概率的估计做了一个错误的假设，即特征向量的各个分量之间各自是独立出现没有联系的。举个例子，例如某封邮件中，前文中出现 “618京东活动日” 这个单词的话，那后文中出现 “购买”、“价格” 等单词的可能性应该是很大的，但是朴素贝叶斯算法却假设这种前后联系的概率是不存在的，也即是这几个彼此存在某种联系的单词的出现从概率上是彼此独立的，这显然是一种错误的假设，但是，这种错误的假设能够极大地简化运算，并且在实际应用中还取得了不错的效果。事实上，也是因为这种错误的假设，所以我们的算法才叫朴素贝叶斯算法（naive bayes algorithm）而不直接叫贝叶斯算法。基于这种 “错误” 的假设，我们可以得到：  </p>
-<p> $$P(X=x|Y=c_k)=P(X=x_1|Y=c_k)P(X=x_2|Y=c_k) \cdots P(X=x_n|Y=c_k)$$  </p>
+<p> $$P(X=x|Y=c_k)=P(X^{(1)}=x_1|Y=c_k)P(X^{(2)}=x_2|Y=c_k) \cdots P(X^{(n)}=x_n|Y=c_k)$$  </p>
 <p> 这样，极大简化了计算。  </p>
 <p>回到最初的问题，我们既然要将新的输入样本归入后验概率最大的类中，就要估计概率 $P(X=x|Y=c_k)$ 和 $P(Y=c_k)$，从而才能确定最大后验概率。参数估计是指模型已知、模型参数未知的情况下，根据样本数据对模型参数进行估计的方法，下面我们分别使用极大似然估计和贝叶斯估计对这两个概率进行估计。  </p>
-<h4 id="极大似然估计"><a href="#极大似然估计" class="headerlink" title="极大似然估计"></a>极大似然估计</h4><p>在第一部分，我们在输出空间中预先定义了 $K$ 个类，分别为：$c_1, c_2, …, c_K$，设这 K 个类出现的概率分别为 $\theta_1, \theta_2, …, \theta_K$，再设训练样本集中总的样本数为 $N$，这 $K$ 个类在训练样本集中出现的次数分别为：$m_1, m_2, …, m_K$，显然，这是一个多项分布，其似然函数为：</p>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML" async>\matchcal{L}(\theta)=</script>
-</div></article></div></main><footer><div class="paginator"><a href="/2018/11/21/2018/11-21-pytorch16/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+<h4 id="极大似然估计"><a href="#极大似然估计" class="headerlink" title="极大似然估计"></a>极大似然估计</h4><p>在第一部分，我们在输出空间中预先定义了 $K$ 个类，分别为：$c_1, c_2, …, c_K$，设这 K 个类出现的概率分别为 $\theta_1, \theta_2, …, \theta_K$，那么：$\theta_1+\theta_2+\cdots+\theta_K=1$，再设训练样本集中总的样本数为 $N$，这 $K$ 个类在训练样本集中出现的次数分别为：$m_1, m_2, …, m_K$，则有：$m_1+m_2+\cdots+m_K = N$。显然，这是一个多项分布，设训练样本集中的样本类别分别为 $y_1, y_2, …, y_N$，得似然函数为：</p>
+<p>$$L(\theta)=P(y_1, y_2, …, y_N|\theta)=\theta_1^{m_1} \cdot \theta_2^{m_2} \cdots \theta_K^{m_K}$$ $$<br>s.t.\qquad \theta_1+\theta_2+\cdots+\theta_K=1$$</p>
+<p>对数似然为：</p>
+<p>$$\ell(\theta)=logL(\theta)=m_1log\theta_1+m_2log\theta_2+\cdots+m_Klog\theta_K $$ $$<br>s.t.\qquad \theta_1+\theta_2+\cdots+\theta_K=1$$</p>
+<p>我们需要最大化对数似然，以求得模型参数。求解带有约束条件的极值问题需要用到拉格朗日乘子法。首先构造拉格朗日函数为：</p>
+<p>$$L(\theta_1, \theta_2, …, \theta_K, \lambda)=m_1log\theta_1+m_2log\theta_2+\cdots+m_Klog\theta_K+\lambda \cdot (\theta_1+\theta_2+\cdots+\theta_K-1)$$</p>
+<p>要求得以上拉格朗日函数的极值，对每一个 $\theta_i (i=1, 2, …, K)$，令：</p>
+<p>$$\nabla_{\theta_i}L(\theta_1, \theta_2, …, \theta_K, \lambda)=\frac{m_i}{\theta_i}+\lambda=0$$ </p>
+<p>从而得：</p>
+<p>$$\theta_i=-\frac{m_i}{\lambda}$$</p>
+<p>由 $\theta_1+\theta_2+\cdots+\theta_K=1, m_1+m_2+\cdots+m_K = N$，得：$\lambda=-N$  </p>
+<p>将 $\lambda$ 代入上式，可得：</p>
+<p>$$P(Y=c_k)=\theta_k=\frac{m_k}{N}$$</p>
+<p>此即为 $P(Y=c_k)$ 的极大似然估计。</p>
+<p>根据以上对朴素贝叶斯算法 “错误” 假设的陈述，如果要对 $P(X=x|Y=c_k)$ 进行极大似然估计，只需对每一个 $x_i (i=1,2, …, n)$，对 $P(X^{(i)}=x_i|Y=c_k)$ 进行极大似然估计即可。设在训练样本集中类别为 $c_k$ 的样本总数为 $S$ 个，在这 $S$ 个样本中，特征向量的第 $i$ 个分量为 $x_i$ 的样本个数为 $t_i$ 个，同理，经过以上极大似然估计过程，得 $P(X^{(i)}=x_i|Y=c_k)$ 的极大似然估计为：</p>
+<p>$$P(X^{(i)}=x_i|Y=c_k)=\frac{t_i}{S}$$</p>
+<p>根据训练样本集对 $P(Y=c_k)$ 和 $P(X^{(i)}=x_i|Y=c_k)$ 的极大似然估计结果，我们就可以根据后验概率最大化原则对输入的特征向量 $x$ 进行分类了。但是，请注意了，这里有一个问题，考虑一个极端情况，当输入的特征向量的某一个具体的分量 $x_i$ 具有非常重要的判别性质，但是在训练样本集的任何一个类对应的任何一个特征向量，其分量都不包含 $x_i$，这种情况下，对任意类 $c_k$，$P(X^{(i)}=x_i|Y=c_k)=0$，所有的后验概率都为 0，这样我们的分类器就无所适从了。为了更好地应对这种情况，我们需要引入拉普拉斯平滑，而引入拉普拉斯平滑的数学基础，就是我们接下来要介绍的贝叶斯估计的朴素贝叶斯算法。</p>
+<h4 id="贝叶斯估计"><a href="#贝叶斯估计" class="headerlink" title="贝叶斯估计"></a>贝叶斯估计</h4><p>极大似然估计认为先验概率 $P(Y=c_k)$ （即 $\theta_k$）是一个 “确定的” 量，注意我的定语是 “确定”，也就是说，$P(Y=c_k)$ 一定取某个确定的值，并且我们由训练样本集估计出的它取这个值的可能性是百分百的。而贝叶斯估计则不然，贝叶斯估计进行统计建模的出发点是认为先验概率 $P(Y=c_k)$ 是一个随机事件，也就是说，$P(Y=c_k)$ 取得某个值是有一定的概率的，这个概率实际上可以通俗地认为是概率的概率。我们通常使用 $\beta$ 分布或 $Dirichlet$ 分布来对概率的概率引入先验信息，前者适用于两个变量的情况，而后者适用于多变量的情况。显然，我们这里应该使用 $Dirichlet$ 分布，即概率密度函数为：</p>
+<p>$$P(\theta)=P(\theta_1,\theta_2,\cdots,\theta_K|\alpha_1, \alpha_2,\cdots,\alpha_K)=\frac{\prod_{i=1}^K{\Gamma(\alpha_i)}}{\Gamma(\Sigma_{i=1}^K{\alpha_i})}\theta_1^{\alpha_1-1}\theta_2^{\alpha_2-1}\cdots\theta_K^{\alpha_K-1}$$</p>
+<p>在引入先验信息的时候，我们假设 $\theta_1, \theta_2, …, \theta_K$ 出现的可能性是相同的，这样的假设是怎么来的呢？猜的，对，没错，就是猜的。在没有任何根据，没有得到任何有关训练样本集信息的情况下，事先人为地进行猜测的。事实上，这也是一直以来频率学派诟病贝叶斯学派的地方，他们认为在没有任何样本信息的情况下你怎么能胡乱引入先验信息瞎猜呢？关于频率学派和贝叶斯学派相爱相杀的故事有兴趣的读者可以私下了解一下，这里就不赘述了。当然，说是瞎猜，其实也并不是瞎猜的，一切都要以模型的实际工作效果为标准，你猜的模型实际工作的时候效果一塌糊涂，说明你猜错了，先验信息有问题，回过头去重新猜吧。事实上，我们在引入等可能性假设的 $Dirichlet$ 先验信息之后，模型的实际工作效果很好，所以，我们先接受这个等可能性假设，接着往下看吧。</p>
+<p>这里的等可能性假设，反映在上面的概率密度函数上，我们可以令 $\alpha_1=\alpha_2=…=\alpha_K=\alpha&gt;1$，在以上概率密度函数的等号右侧，$\frac{\prod_{i=1}^K{\Gamma(\alpha_i)}}{\Gamma(\Sigma_{i=1}^K{\alpha_i})}$ 是一个与 $\theta_i(i=1,2,…,K)$ 无关的归一化因子，它的存在是为了保证所有的概率之和为 1，所以，以上概率密度函数可以写成如下形式：</p>
+<p>$$P(\theta)=P(\theta_1,\theta_2,\cdots,\theta_K|\alpha)=\frac{\Gamma(\alpha)^K}{\Gamma(K\cdot{\alpha})}\theta_1^{\alpha-1}\theta_2^{\alpha-1}\cdots\theta_K^{\alpha-1} \propto \theta_1^{\alpha-1}\theta_2^{\alpha-1}\cdots\theta_K^{\alpha-1} $$</p>
+<p>先验信息引入之后，我们来看一下后验概率：</p>
+<p>$$P(\theta|y_1, y_2, …, y_N)=\frac{P(\theta, y_1, y_2, …, y_N)}{P(y_1, y_2, …, y_N)}\\<br>\propto P(\theta, y_1, y_2, …, y_N)\\<br>=P(y_1, y_2, …, y_N|\theta)P(\theta)\\<br>=\theta_1^{m_1}\theta_2^{m_2}\cdots\theta_K^{m_K}\theta_1^{\alpha-1}\theta_2^{\alpha-1}\cdots\theta_K^{\alpha-1}\\<br>=\theta_1^{\alpha+m_1-1}\theta_2^{\alpha+m_2-1}\cdots\theta_K^{\alpha+m_K-1}$$</p>
+<p>即：$P(\theta|y_1, y_2, …, y_N)\propto\theta_1^{\alpha+m_1-1}\theta_2^{\alpha+m_2-1}\cdots\theta_K^{\alpha+m_K-1}$，极大化后验概率，即需要极大化 $\theta_1^{\alpha+m_1-1}\theta_2^{\alpha+m_2-1}\cdots\theta_K^{\alpha+m_K-1}$，先取对数，其求解过程与极大似然估计部分相同（建议读者自行动笔试一试），这里直接给出结论：</p>
+<p>$$P(Y=c_k)=\theta_{c_k}=\frac{m_k+(\alpha-1)}{N+K(\alpha-1)}$$</p>
+<p>取 $\alpha-1=\eta$，得：</p>
+<p>$$P(Y=c_k)=\theta_{c_k}=\frac{m_k+\eta}{N+K\cdot\eta}$$</p>
+<p>同理，若设特征向量 $x$ 的第 $i$ 个分量 $x_i$ 的取值共有 $\Lambda$ 种情况，可以得到条件概率 $P(X^{(i)}=x_i|Y=c_k)$ 的贝叶斯估计为：</p>
+<p>$$P(X^{(i)}=x_i|Y=c_k)=\frac{t_i+\eta}{S+\Lambda\cdot\eta}$$</p>
+<p>当 $\eta=0$ 时，贝叶斯估计就是极大似然估计。 当 $\eta=1$ 时，以上过程称为拉普拉斯平滑。可以看到，拉普拉斯平滑能有效避免上文所提到的极大似然估计面对的极端情形。</p>
+<p>以上我们分别通过极大似然估计和贝叶斯估计两种方法，解决了将输入的特征向量归属为最大的后验概率所属类别时所需要解决的参数估计问题。那么，接下来一个问题是，为什么我们要把输入的特征向量归属为最大的后验概率所属的类别呢？上文我们给出了直觉的解释，下面我们将从数学的角度，严格证明为什么这么做是对的。</p>
+<h3 id="为什么这种解决方法是有效的"><a href="#为什么这种解决方法是有效的" class="headerlink" title="为什么这种解决方法是有效的"></a>为什么这种解决方法是有效的</h3><p>对于机器学习问题，我们通常使用损失函数来度量机器学习模型的好坏程度。对于分类问题，我们通常使用 $0-1$ 损失。若将分类模型看做由输入的特征向量到输出类别的一个映射，我们可以将分类过程写成由 $f(X) \to Y$ 的函数形式，$Y^*$ 是该特征向量的类别标签，$Y^*\in ${$c_1, c_2, …, c_K$}$ $，则 $0-1$ 损失定义为：</p>
+<p>$$L(f(X),Y^*)=<br>\begin{cases}<br>0&amp; \text{$f(X)$ = $Y^*$}\\<br>1&amp; \text{$f(x)$ $\neq$ $Y^*$}<br>\end{cases}$$</p>
+<p>以上损失函数是我们的经验风险函数。我们的目的是希望模型在未知数据上的表现比较好，所以我们希望将期望风险最小化。其过程如下：</p>
+<p>$$\mathbb{E}(L(f(X), Y^*)=\sum_{Y^*}\sum_{X}L(f(X), Y^*)P(X, Y^*)\\<br>=\sum_{Y^*}\sum_{X}L(f(X), Y^*)P(Y^*|X)P(X)\\<br>=\sum_{X}[\sum_{Y^*}L(f(X), Y^*)P(Y^*|X)]P(X)$$</p>
+<p>要最小化期望风险，只需对于每一个 $X$，最小化上式中括号的部分即可。$I(\blacktriangle)$ 是一个指示函数，当 $\blacktriangle$ 代表的内容为真时，该指示函数取值为 $1$，否则取值为 $0$。进一步求解如下：</p>
+<p>$$<br>\sum_{Y^*}L(f(X), Y^*)P(Y^*|X)\\<br>=\sum_{Y^*}I(f(X) \neq Y^*)P(Y^*|X)\\<br>=\sum_{Y^*}(1-I(f(X) = Y^*))P(Y^*|X)\\<br>=1-I(f(X) = Y^*)P(Y^*|X)<br>$$</p>
+<p>要想最小化上式，只需最大化 $I(f(X) = Y^*)P(Y^*|X)$ 即可，而最大化此式就等价于将 $X$ 归属为后验概率最大的类别中。由此证明朴素贝叶斯算法将输入的特征向量归属到后验概率最大的类中是有效的。 </p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/11/21/2018/11-21-pytorch16/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
 var disqus_identifier = '2019/06/19/2019/06-14-naive-bayes/';
 var disqus_title = '朴素贝叶斯算法详解';
 var disqus_url = 'http://blog.keeplearning.group/2019/06/19/2019/06-14-naive-bayes/';
