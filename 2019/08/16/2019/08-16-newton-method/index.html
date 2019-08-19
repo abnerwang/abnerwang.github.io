@@ -49,7 +49,8 @@
 <p>经过以上过程，得到 BFGS 算法如下：</p>
 <p>输入：目标函数 $f(x)$，梯度 $g(x)$，精度 $\varepsilon$。<br>输出：目标函数 $f(x)$ 取得极小值时的最优值 $x^*$ 。<br>(1) 取初始点为 $x^{(0)}$，取 $B_0$ 为正定对称矩阵，置 $k$ 为 $0$；<br>(2) 计算梯度 $g_k=g(x^{(k)})$，若 $\Arrowvert g_k \Arrowvert&lt;\varepsilon$，则停止计算，得 $x^*=x^{(k)}$，否则继续下一步；<br>(3) 令 $B_kp_k=-g_k$，求出 $p_k$，执行一维搜索，求步长因子 $\lambda_k$ 使得 $\lambda_k=argmin_{\lambda}f(x^{(k)}+\lambda p_k)$；<br>(4) 计算 $x^{(k+1)}=x^{(k)}+\lambda_k p_k$ ；<br>(5) 计算梯度 $g_{k+1}=g(x^{(k+1)})$，若 $\Arrowvert g_{k+1} \Arrowvert&lt;\varepsilon$，则停止计算，得 $x^*=x^{(k+1)}$，否则按式 $B_{k+1}=B_k+\frac{y_k{y_k}^T}{y_k^T \delta_k}-\frac{B_k\delta_k\delta_k^TB_k}{\delta_k^TB_k\delta_k}$ 计算 $B_{k+1}$，令 $k=k+1$，返回步骤（3）。</p>
 <h4 id="Broyden-类算法"><a href="#Broyden-类算法" class="headerlink" title="Broyden 类算法"></a>Broyden 类算法</h4><p>在介绍 Broyden 类算法之前，首先介绍一下 Sherman-Morrison 公式。</p>
-<p><strong>Sherman-Morrison 公式</strong><br>假设 $A$ 是 n 阶可逆矩阵，$u、v$ 是 n 维向量，且 $A+uv^T$ 也是可逆矩阵，则可得：</p>
+<p><strong>Sherman-Morrison 公式</strong></p>
+<p>假设 $A$ 是 n 阶可逆矩阵，$u、v$ 是 n 维向量，且 $A+uv^T$ 也是可逆矩阵，则：</p>
 <p>$$(A+uv^T)^{-1}=A^{-1}-\frac{A^Tuv^TA^{-1}}{1+v^TA^{-1}u}$$</p>
 <p>上式称为 Sherman-Morrison 公式。</p>
 <p>对于上文所述的 <strong>DFP 算法</strong> 和 <strong>BFGS 算法</strong> 而言，容易验证：$G_k=B_k^{-1}$，$G_{k+1}=B_{k+1}^{-1}$，对 <strong>BFGS 算法</strong> 的迭代公式 $B_{k+1}=B_k+\frac{y_ky_k^T}{y_k^T\delta_k}-\frac{B_k\delta_k\delta_k^TB_k}{\delta_k^TB_k\delta_k}$ 两次应用 Sherman-Morrison 公式可得：</p>
