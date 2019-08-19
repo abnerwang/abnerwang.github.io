@@ -18,7 +18,7 @@
 <p>取对数似然：</p>
 <p>$$L(w)=\Sigma_{i=1}^N [y^{(i)}log\pi(x^{(i)})+(1-y^{(i)})log(1-\pi(x^{(i)}))]\\<br>=\Sigma_{i=1}^N[y^{(i)}log \frac{\pi(x^{(i)})}{1-\pi(x^{(i)})}+log(1-\pi(x^{(i)})]\\<br>=\Sigma_{i=1}^N[y^{(i)} \cdot wx^{(i)}-log(1+exp(wx^{(i)}))]$$</p>
 <p>由此，二项 logistic 回归模型的学习问题变为以上对数似然函数的极大化问题。logistic 回归模型的学习算法通常采用梯度下降法和 <a href="http://abnerwang.github.io/2019/08/16/2019/08-16-newton-method/" target="_blank" rel="noopener">拟牛顿法</a>。</p>
-<h3 id="多项-logistic-回归模型"><a href="#多项-logistic-回归模型" class="headerlink" title="多项 logistic 回归模型"></a>多项 logistic 回归模型</h3><p>多项 logistic 回归模型用于多分类问题。设在多分类问题中的类别标签共有 $K$ 个，设样本 $x$ 属于类别 $k$ 的概率是 $p_k$，这里用到的 logit 变换为 $log\frac{p_k}{p_K}$。将该 logit 变换用到这里的多项 logistic 回归模型中，得：</p>
+<h3 id="多项-logistic-回归模型"><a href="#多项-logistic-回归模型" class="headerlink" title="多项 logistic 回归模型"></a>多项 logistic 回归模型</h3><p>多项 logistic 回归模型用于多分类问题。设在多分类问题中的类别标签共有 $K$ 个，样本 $x$ 属于类别 $k$ 的概率是 $p_k$，这里用到的 logit 变换为 $log\frac{p_k}{p_K}$。将该 logit 变换用到这里的多项 logistic 回归模型中，得：</p>
 <p>$$log\frac{P(Y=k|X=x)}{P(Y=K|X=x)}=w^{(k)}x$$</p>
 <p>即有：</p>
 <p>$$\frac{P(Y=k|X=x)}{P(Y=K|X=x)}=exp(w^{(k)}x)\\<br>\Rightarrow \frac{1-P(Y=K|X=x)}{P(Y=K|X=x)}=\Sigma_{k=1}^{K-1}exp(w^{(k)}x)$$</p>
