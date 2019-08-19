@@ -51,6 +51,7 @@
 <h4 id="Broyden-类算法"><a href="#Broyden-类算法" class="headerlink" title="Broyden 类算法"></a>Broyden 类算法</h4><p>在介绍 Broyden 类算法之前，首先介绍一下 Sherman-Morrison 公式。</p>
 <p><strong>Sherman-Morrison 公式</strong><br>假设 $A$ 是 n 阶可逆矩阵，$u、v$ 是 n 维向量，且 $A+uv^T$ 也是可逆矩阵，则可得：</p>
 <p>$$(A+uv^T)^{-1}=A^{-1}-\frac{A^Tuv^TA^{-1}}{1+v^TA^{-1}u}$$</p>
+<p>上式称为 Sherman-Morrison 公式。</p>
 <p>对于上文所述的 <strong>DFP 算法</strong> 和 <strong>BFGS 算法</strong> 而言，容易验证：$G_k=B_k^{-1}$，$G_{k+1}=B_{k+1}^{-1}$，对 <strong>BFGS 算法</strong> 的迭代公式 $B_{k+1}=B_k+\frac{y_ky_k^T}{y_k^T\delta_k}-\frac{B_k\delta_k\delta_k^TB_k}{\delta_k^TB_k\delta_k}$ 两次应用 Sherman-Morrison 公式可得：</p>
 <p>$$G_{k+1}=(I-\frac{\delta_ky_k^T}{\delta_k^Ty_k})G_k(I-\frac{\delta_ky_k^T}{\delta_k^Ty_k})^T+\frac{\delta_k\delta_k^T}{\delta_k^Ty_k}$$</p>
 <p>以上称为 <strong>BFGS 算法</strong> 关于 $G_{k+1}$ 的迭代公式。</p>
