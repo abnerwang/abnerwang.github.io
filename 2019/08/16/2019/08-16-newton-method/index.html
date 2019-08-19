@@ -1,0 +1,55 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 牛顿法与拟牛顿法 · Qiyexuxu</title><meta name="description" content="牛顿法与拟牛顿法 - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">牛顿法与拟牛顿法</h1><div class="tags"><a href="/tags/牛顿法与拟牛顿法/" class="tag-title">#牛顿法与拟牛顿法</a></div><div class="post-info">Aug 16, 2019</div><div class="post-content"><p>本文首先从一个不带约束条件的最优化问题出发，导出用以解决此类问题的牛顿法，接着针对牛顿法涉及的计算复杂问题，阐述在此基础上改进得到的拟牛顿法的思路。  </p>
+<h3 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h3><p>我们首先引入如下最优化问题：  </p>
+<p>$$min_{x\in{\mathbb{R}^n}}f(x)$$</p>
+<p>若 $f(x)$ 在其定义域内具有二阶连续偏导数，在其定义域内任取一点 $x^{(k)}$，将 $f(x)$ 在点 $x^{(k)}$ 处进行二阶泰勒展开，得：  </p>
+<p>$$f(x)=f(x^{(k)})+g_k^T(x-x^{(k)})+\frac{1}{2}(x-x^{(k)})^TH_k(x-x^{(k)})$$</p>
+<p>其中，${g_k}=\nabla_{x^{(k)}}f(x^{(k)})$，$H_k=(\frac{\partial^2 f(x^{(k)})}{\partial x_i \partial x_j})_{n \times n}$，该矩阵 $H_k$ 称为 Hessian 矩阵，当 $x \to x^{(k)}$ 时上式成立（即在 $x^{(k)}$ 的小邻域内成立）。由以上引入的最优化问题，我们需要得到 $x^{(k)}$ 小邻域内的极小值，而 $f(x)$ 在 $x^{(k)}$ 小邻域内取得极值的必要条件是 $\nabla_{x}f(x)=0$，在上式中令 $\nabla_{x}f(x)=0$，得：</p>
+<a id="more"></a>  
+<p>$$\nabla_{x}f(x)={g_k}+H_k(x-x^{(k)})=0$$</p>
+<p><strong>当 Hessian 矩阵 $H_k$ 正定时（$H_k^{-1}$ 也正定），$f(x)$ 在 $x^{(k)}$ 小邻域内取得极小值，这也是牛顿法能够收敛的条件</strong>，由上式解得此时 $x=x^{(k)}-{H_k}^{-1}g_k$，将此时得到的 $x$ 置为新的 $x^{(k)}$，如此循环迭代，最后必能得到函数 $f(x)$ 的全局最小值。特别地，当 $x \in \mathbb{R}$ 时，以上过程如下图所示：</p>
+<p><img src="https://res.cloudinary.com/dtfjnb8ft/image/upload/v1565928813/640px-NewtonIteration_Ani.gif" alt="newton method"></p>
+<p>上图中的 $f(x_i),(i=1, 2, 3, 4, 5)$ 实际上指的是目标函数的一阶导数，而 $f’(x_i),(i=1,2,3,4,5)$ 则指的是目标函数的二阶导数。由上图可知，随着 $x$ 值的不断更新，使得一阶导数 $f(x_i)$ 逐渐接近其零点 $x_5$，而一阶导数为 $0$ 时，其对应的目标函数取得全局最优值。</p>
+<p>我们将由牛顿法求目标函数全局最小值的过程概括成如下步骤：</p>
+<p>输入：目标函数 $f(x)$，梯度 $g(x)$ 和 Hessian 矩阵 $H(x)$，精度 $\varepsilon$。<br>输出：目标函数 $f(x)$ 取得最小值时的最优值 $x^*$ 。<br>(1) 取初始点为 $x^{(0)}$，置 $k$ 为 $0$；<br>(2) 计算梯度 $g_k=g(x^{(k)})$，若 $\Arrowvert g_k \Arrowvert&lt;\varepsilon$，则停止计算，令 $x^*=x^{(k)}$，否则继续下一步；<br>(3) 计算 Hessian 矩阵 $H_k=H(x^{(k)})$，按 $x^{(k+1)}=x^{(k)}-H_k^{-1}g_k$ 更新 $x$ 的值，令 $k=k+1$，返回步骤（2）。</p>
+<p>泰勒公式反映了一种重要的微积分思想，那就是“以曲代曲”，即用简单曲线代替复杂曲线的求解过程。二阶泰勒展开是一种二次曲线，当目标函数也是二次函数时，或者目标函数不是二次函数，但是二次形态较强，亦或者迭代点已经进入极小点的邻域，那么牛顿法的收敛速度是非常快的。但是，对于非二次型的目标函数，有时会使函数值上升，即出现 $f(x^{(k+1)})&gt;f(x^{(k)})$ 的情况，在严重的情况下甚至能够引起迭代点列 $\{x^{(k)}\}$ 发散而导致计算失败。针对这一问题，考虑在原始牛顿法的基础上引入迭代步长，这种方法称为 <strong>阻尼牛顿法</strong>，记最优的步长因子为 $\lambda_k(&gt;0)$，其值通过以下过程获得：</p>
+<p>$$\lambda_k=argmin_{\lambda \in \mathbb{R}}f(x^{(k)}-\lambda H_k^{-1}g_k)$$</p>
+<p>将以上步骤 (3) 中的 $x^{(k+1)}=x^{(k)}-H_k^{-1}g_k$ 改为 $x^{(k+1)}=x^{(k)}-\lambda H_k^{-1}g_k$，原过程其他部分保持不变，即得阻尼牛顿法求目标函数全局最小值的过程。</p>
+<p>Hessian 矩阵 $H_k$ 正定（$H_k^{-1}$ 也正定）是牛顿法收敛的重要条件，也就是说这样可以保证牛顿法的搜索方向是目标函数的下降方向，下面我们进一步说明这是为什么。若记 $p_k=-H_kg_k$，同时引入步长因子 $\lambda_k$，则 $x$ 的更新过程为：$x^{(k+1)}=x_k+\lambda_k p_k$，将此式代入目标函数的二阶泰勒展开式中，可得：  </p>
+<p>$$f(x^{(k+1)}) \thickapprox f(x^{(k)})-\lambda_k {g_k}^T {H_k}^{-1}g_k$$</p>
+<p>由于 $H_k^{-1}$ 正定，由矩阵正定的定义可得 ${g_k}^T {H_k}^{-1}g_k &gt; 0$，而步长因子 $\lambda_k &gt; 0$，因此，$f(x^{(k+1)}) &lt; f(x^{(k)})$，所以 Hessian 矩阵 $H_k$ 正定保证了牛顿法的搜索方向始终是目标函数的下降方向。</p>
+<p>由以上过程可知，牛顿法在进行数值更新的时候，每次都要计算 Hessian 矩阵的逆 $H_k^{-1}$。这种计算是很复杂的。由此我们考虑是否可以用某个矩阵来代替这里的 Hessian 矩阵 $H_k$ 或者 $H_k^{-1}$，基于这种思想发展出了后来称之为拟牛顿法的优化方法。</p>
+<h3 id="拟牛顿法"><a href="#拟牛顿法" class="headerlink" title="拟牛顿法"></a>拟牛顿法</h3><p>我们分别考虑用矩阵 $G_k$ 来近似矩阵 $H_k^{-1}$，用矩阵 $B_k$ 来近似矩阵 $H_k$，分别得到 DFP 算法和 BFGS 算法。</p>
+<h4 id="DFP-Davidon-Fletcher-Powell-算法"><a href="#DFP-Davidon-Fletcher-Powell-算法" class="headerlink" title="DFP(Davidon-Fletcher-Powell) 算法"></a>DFP(Davidon-Fletcher-Powell) 算法</h4><p>用矩阵 $G_k$ 来近似矩阵 $H_k^{-1}$，则由原始牛顿法的迭代过程可知，此时 $x^{(k+1)}=x^{(k)}-G_kg_k$，在不满足迭代终止条件的时候，为了继续得到 $x^{(k+2)}$ 使得迭代过程继续下去，那么接下来的一个问题是 $x=x^{(k+1)}$ 时 $G_{k+1}$ 是多少呢？不妨对目标函数 $f(x)$ 在 $x=^{(k+1)}$ 处做二阶泰勒展开，得：  </p>
+<p>$$f(x)=f(x^{(k+1)})+g_{k+1}^T(x-x^{(k+1)})+\frac{1}{2}(x-x^{(k+1)})^TH_{k+1}(x-x^{(k+1)})$$</p>
+<p>上式两边分别对 $x$ 求梯度，得：</p>
+<p>$$\nabla_xf(x)=g_{k+1}+H_{k+1}(x-x^{(k+1)})$$</p>
+<p>上式中，因为 $x^{(k)}$ 在 $x^{(k+1)}$ 的一个小邻域内，故可取 $x=x^{(k)}$，代入上式，可得：</p>
+<p>$$g_{k+1}-g_k=H_{k+1}(x^{(k+1)}-x^{(k)})$$</p>
+<p>记 $y_k=g_{k+1}-g_k$，$\delta_k=x^{(k+1)}-x^{(k)}$，上式变为：</p>
+<p>$$y_k=H_{k+1}\delta_k$$</p>
+<p>或：</p>
+<p>$$\delta_k=H_{k+1}^{-1}y_k$$</p>
+<p>以上两式称为 <strong>拟牛顿条件</strong>。</p>
+<p>当使用 $G_{k+1}$ 来近似 $H_{k+1}^{-1}$ 时，它必须满足上文所述的拟牛顿条件，即 $\delta_k=G_{k+1} \cdot y_k$。对 $G_k$ 进行更新得到 $G_{k+1}$，令 $G_{k+1} = G_k + \Delta G$，考虑 $\Delta G$ 为两个附加项 $P_k$、$Q_k$ 之和，即有：  </p>
+<p>$$G_{k+1}=G_k+P_k+Q_k$$</p>
+<p>上式等号两边同时乘以 $y_k$ 可得：</p>
+<p>$$G_{k+1}y_k=G_k y_k + P_k y_k + Q_k y_k$$</p>
+<p>上式等号左端为 $\delta_k$，若令右端 $P_k y_k = \delta_k$，则必须有 $Q_k y_k = -G_k y_k$，为满足上述条件，可取 $P_k=\frac{\delta_k{\delta_k}^T}{\delta_k^T y_k}$，$Q_k=-\frac{G_ky_ky_k^TG_k}{y_k^TG_ky_k}$，则有：</p>
+<p>$$G_{k+1}=G_k+\frac{\delta_k{\delta_k}^T}{\delta_k^T y_k}-\frac{G_ky_ky_k^TG_k}{y_k^TG_ky_k}$$</p>
+<p>以上就是 DFP 算法用到的 $G_{k+1}$ 的迭代公式。细心的读者可能发现此时 $G_{k+1}$ 是否正定呢？事实上，只要初始的 $G_0$ 是正定的，后续迭代得到的每个 $G_{k+1}$ 都是正定的。</p>
+<p>经过以上对 $G_k$ 迭代过程的分析，我们得到 DFP 算法的具体步骤如下：</p>
+<p>输入：目标函数 $f(x)$，梯度 $g(x)$，精度 $\varepsilon$。<br>输出：目标函数 $f(x)$ 取得最小值时的最优值 $x^*$ 。<br>(1) 取初始点为 $x^{(0)}$，取 $G_0$ 为正定对称矩阵，置 $k$ 为 $0$；<br>(2) 计算梯度 $g_k=g(x^{(k)})$，若 $\Arrowvert g_k \Arrowvert&lt;\varepsilon$，则停止计算，令 $x^*=x^{(k)}$，否则继续下一步；<br>(3) 令 $p_k=-G_kg_k$，执行一维搜索，求步长因子 $\lambda_k$ 使得 $\lambda_k=argmin_{\lambda}f(x^{(k)}+\lambda p_k)$；<br>(4) 计算 $x^{(k+1)}=x^{(k)}+\lambda_k p_k$ ；<br>(5) 计算梯度 $g_{k+1}=g(x^{(k+1)})$，若 $\Arrowvert g_{k+1} \Arrowvert&lt;\varepsilon$，则停止计算，令 $x^*=x^{(k+1)}$，否则按式 $G_{k+1}=G_k+\frac{\delta_k{\delta_k}^T}{\delta_k^T y_k}-\frac{G_ky_ky_k^TG_k}{y_k^TG_ky_k}$ 计算 $G_{k+1}$，令 $k=k+1$，返回步骤（3）。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2019/06/19/2019/06-14-naive-bayes/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+var disqus_identifier = '2019/08/16/2019/08-16-newton-method/';
+var disqus_title = '牛顿法与拟牛顿法';
+var disqus_url = 'http://blog.keeplearning.group/2019/08/16/2019/08-16-newton-method/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//abnerwang.disqus.com/count.js" async></script><div class="copyright"><p>© 2014 - 2019 <a href="http://blog.keeplearning.group">David Wang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+tex2jax: { inlineMath: [ ["$", "$"], ["\\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+messageStyle: "none"
+});
+</script></body></html>
