@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.keeplearning.group/about/index.html</loc>
+    
+    <lastmod>2019-08-19T13:09:55.540Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.keeplearning.group/2019/08/19/2019/08-19-logistic_regression/</loc>
     
     <lastmod>2019-08-19T13:08:18.385Z</lastmod>
@@ -187,13 +194,6 @@
     <loc>http://blog.keeplearning.group/2017/07/31/2017/07-31-learn-program/</loc>
     
     <lastmod>2018-11-07T08:29:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.keeplearning.group/about/index.html</loc>
-    
-    <lastmod>2018-11-07T07:44:41.000Z</lastmod>
     
   </url>
   
