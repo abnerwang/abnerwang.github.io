@@ -53,7 +53,7 @@
 <p>要最小化期望风险，只需对于每一个 $X$，最小化上式中括号的部分即可。$I(\blacktriangle)$ 是一个指示函数，当 $\blacktriangle$ 代表的内容为真时，该指示函数取值为 $1$，否则取值为 $0$。进一步求解如下：</p>
 <p>$$<br>\sum_{Y^*}L(f(X), Y^*)P(Y^*|X)\\<br>=\sum_{Y^*}I(f(X) \neq Y^*)P(Y^*|X)\\<br>=\sum_{Y^*}(1-I(f(X) = Y^*))P(Y^*|X)\\<br>=1-I(f(X) = Y^*)P(Y^*|X)<br>$$</p>
 <p>要想最小化上式，只需最大化 $I(f(X) = Y^*)P(Y^*|X)$ 即可，而最大化此式就等价于将 $X$ 归属为后验概率最大的类别中。由此证明朴素贝叶斯算法将输入的特征向量归属到后验概率最大的类中是有效的。 </p>
-</div></article></div></main><footer><div class="paginator"><a href="/2019/08/16/2019/08-16-newton-method/" class="prev">PREV</a><a href="/2018/11/21/2018/11-21-pytorch16/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+</div></article></div></main><footer><div class="paginator"><a href="/2019/08/16/2019/08-16-newton-method/" class="prev">上一篇</a><a href="/2018/11/21/2018/11-21-pytorch16/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
 var disqus_identifier = '2019/06/19/2019/06-14-naive-bayes/';
 var disqus_title = '朴素贝叶斯算法详解';
 var disqus_url = 'http://blog.keeplearning.group/2019/06/19/2019/06-14-naive-bayes/';

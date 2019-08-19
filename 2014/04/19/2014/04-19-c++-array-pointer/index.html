@@ -5,7 +5,7 @@
 <p>其实，只要指针指向的是数组中的某一个元素（或者数组中尾元素的下一位置），都能对它进行下标运算：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = &amp;arr[<span class="number">2</span>];  <span class="comment">// 指针 p 指向索引为 2 的元素</span></span><br><span class="line"><span class="keyword">int</span> j = p[<span class="number">3</span>];   <span class="comment">// p[3] 等价于 *(p + 3)，就是元素 arr[5]</span></span><br><span class="line"><span class="keyword">int</span> k = p[<span class="number">-2</span>];  <span class="comment">// p[-2] 等价于 *(p - 2)，就是元素 arr[0]</span></span><br></pre></td></tr></table></figure>
 <p>需要注意的是，虽然数组和标准库类型 <code>vector</code> 、 <code>string</code> 都能进行下标运算，但是， <strong>标准库类型使用的下标必须是无符号类型，而内置的下标运算没有这个要求</strong> 。</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2014/04/24/2014/04-24-algorithms-kth/" class="prev">PREV</a><a href="/2014/04/19/2014/04-19-c++-string&amp;c/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+</div></article></div></main><footer><div class="paginator"><a href="/2014/04/24/2014/04-24-algorithms-kth/" class="prev">上一篇</a><a href="/2014/04/19/2014/04-19-c++-string&amp;c/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
 var disqus_identifier = '2014/04/19/2014/04-19-c++-array-pointer/';
 var disqus_title = 'C++ 中数组的指针和下标';
 var disqus_url = 'http://blog.keeplearning.group/2014/04/19/2014/04-19-c++-array-pointer/';
