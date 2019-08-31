@@ -41,7 +41,7 @@
 <p>上式中，$w_i$ 为特征约束 $f_i(x, y)$ 的权重。实际上，上式两端取自然对数 $log$，得：$logP_w(y|x)=log\frac{exp(\Sigma_1^nw_if_i(x, y))}{Z_w(x)}=\Sigma_1^nw_if_i(x, y)-logZ_w(x)$，也就是说，模型 $P_w(y|x)$ 与特征函数 $f_i(x, y)$ 存在着以上这种线性关系，这也是最大熵模型是一种对数线性模型的原因。</p>
 <p>又由于 $\Sigma_yP_w(y|x)=1$，代入上式，两边分别取 $\Sigma_y$，可解得：</p>
 <p>$$Z_w(x)=\Sigma_yexp(\Sigma_1^nw_if_i(x, y))$$</p>
-<p>接着考虑对偶问题最外部的极大化问题，即对偶问题的解为：$\mathcal{L}(P_w, w)$，取得以上最优解时 $w$ 对应的最优值 $w^*=argmax_w\;\mathcal{L}(P_w, w)$。可以采用改进的迭代尺度法和拟牛顿法求解这里的最优值，我们将在下一篇文章中分别介绍这两种算法，在这之前，我们先来看一下最大熵模型的极大似然估计与对偶函数的极大化之间有什么关系。</p>
+<p>接着考虑对偶问题最外部的极大化问题，即：$max_w\;\mathcal{L}(P_w, w)$，取得以上最优解时 $w$ 对应的最优值 $w^*=argmax_w\;\mathcal{L}(P_w, w)$。可以采用改进的迭代尺度法和拟牛顿法求解这里的最优值，我们将在下一篇文章中分别介绍这两种算法，在这之前，我们先来看一下最大熵模型的极大似然估计与对偶函数的极大化之间有什么关系。</p>
 <h3 id="最大熵模型的极大似然估计"><a href="#最大熵模型的极大似然估计" class="headerlink" title="最大熵模型的极大似然估计"></a>最大熵模型的极大似然估计</h3><p>设 $\widetilde{P}(x,y)$ 是训练数据集中关于样本特征 $x$ 和标签 $y$ 的联合概率分布，则条件分布 $P(y|x)$ 的似然函数为：</p>
 <p>$$\mathcal{l}(P(y|x))=\Pi_{x,y}P(y|x)^{\widetilde{P}(x,y)}$$</p>
 <p>取对数似然：</p>
@@ -50,8 +50,8 @@
 <p>$$<br>\mathcal{L}(P_w(y|x))=\Sigma_{x,y}\widetilde{P}(x,y)logP_w(y|x)\\<br>=\Sigma_{x,y}\widetilde{P}(x,y)(\Sigma_1^nw_if_i(x, y)-logZ_w(x))\\<br>=\Sigma_{x,y}\widetilde{P}(x,y)\Sigma_1^nw_if_i(x, y)-\Sigma_x\widetilde{P}(x)\Sigma_y\widetilde{P}(y|x)logZ_w(x)\\<br>=\Sigma_{x,y}\widetilde{P}(x,y)\Sigma_1^nw_if_i(x, y)-\Sigma_x\widetilde{P}(x)logZ_w(x)<br>$$</p>
 <p>我们回过头来看一下对偶函数的极大化过程，将最大熵模型 $P_w(y|x)$ 代入以上广义拉格朗日函数中（注意下面的 $\mathcal{L}$ 为广义拉格朗日函数而不是上文的对数似然函数），得：</p>
 <p>$$\mathcal{L}(P_w, w)=\Sigma_{x,y}\widetilde{P}(x)P_w(y|x)logP_w(y|x)+w_0(1-\Sigma_yP_w(y|x))+\Sigma_1^nw_i(\Sigma_{x,y}\widetilde{P}(x, y)f_i(x, y)-\Sigma_{x,y}\widetilde{P}(x)P_w(y|x)f_i(x, y))\\<br>=\Sigma_{x,y}\widetilde{P}(x)P_w(y|x)(\Sigma_1^nw_if_i(x,y)-logZ_w(x))+\Sigma_{x,y}\widetilde{P}(x, y)\Sigma_1^nw_if_i(x, y)-\Sigma_{x,y}\widetilde{P}(x)P_w(y|x)\Sigma_1^nw_if_i(x, y)\\<br>=\Sigma_{x,y}\widetilde{P}(x, y)\Sigma_1^nw_if_i(x, y)-\Sigma_{x,y}\widetilde{P}(x)P_w(y|x)logZ_w(x)\\<br>=\Sigma_{x,y}\widetilde{P}(x, y)\Sigma_1^nw_if_i(x, y)-\Sigma_x\widetilde{P}(x)\Sigma_yP_w(y|x)logZ_w(x)\\<br>=\Sigma_{x,y}\widetilde{P}(x,y)\Sigma_1^nw_if_i(x, y)-\Sigma_x\widetilde{P}(x)logZ_w(x)$$</p>
-<p>由此可见，对偶函数的极大化与最大熵模型的极大似然估计是等价的。因此，我们可以通过求解最大熵模型的极大似然估计问题来求解对偶函数的极大化，而要使用的方法就是我们下篇文章所述的改进的迭代尺度法和 <a href="http://abnerwang.github.io/2019/08/16/2019/08-16-newton-method/" target="_blank" rel="noopener">拟牛顿法</a>。</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2019/08/19/2019/08-19-logistic_regression/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+<p>由此可见，对偶函数的极大化与最大熵模型的极大似然估计是等价的。因此，我们可以通过求解最大熵模型的极大似然估计问题来求解对偶函数的极大化问题，而要使用的方法就是我们下篇文章所述的改进的迭代尺度法和 <a href="http://abnerwang.github.io/2019/08/16/2019/08-16-newton-method/" target="_blank" rel="noopener">拟牛顿法</a>。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2019/08/19/2019/08-19-logistic_regression/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
 var disqus_identifier = '2019/08/20/2019/08-20-max_entropy_model/';
 var disqus_title = '最大熵模型';
 var disqus_url = 'http://blog.keeplearning.group/2019/08/20/2019/08-20-max_entropy_model/';
