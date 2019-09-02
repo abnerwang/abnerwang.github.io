@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 最大熵模型的求解 · Qiyexuxu</title><meta name="description" content="最大熵模型的求解 - David Wang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.keeplearning.group/atom.xml" title="Qiyexuxu"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/abnerwang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">最大熵模型的求解</h1><div class="tags"><a href="/tags/机器学习/" class="tag-title">#机器学习</a><a href="/tags/最大熵模型/" class="tag-title">#最大熵模型</a></div><div class="post-info">Aug 31, 2019</div><div class="post-content"><p>在 <a href="http://abnerwang.github.io/2019/08/20/2019/08-20-max_entropy_model/" target="_blank" rel="noopener">上一节</a> 中，我们知道对偶函数的极大化与最大熵模型的极大似然估计是等价的，因此，我们可以通过求解最大熵模型的极大似然估计问题来求解对偶函数的极大化问题，进而求解原始优化问题，这也是本节介绍的改进的迭代尺度法的思路。而拟牛顿法可通过直接求解的方式得到最优化的最大熵模型。</p>
+<h3 id="改进的迭代尺度法"><a href="#改进的迭代尺度法" class="headerlink" title="改进的迭代尺度法"></a>改进的迭代尺度法</h3><p>在 <a href="http://abnerwang.github.io/2019/08/20/2019/08-20-max_entropy_model/" target="_blank" rel="noopener">上一节</a> 中我们得到的最大熵模型的对数似然函数为：</p>
+<p>$$\mathcal{L}(w)=\Sigma_{x,y}\widetilde{P}(x,y)\Sigma_{i=1}^nw_if_i(x, y)-\Sigma_x\widetilde{P}(x)logZ_w(x)$$</p>
+<p>其中，$Z_w(x)=\Sigma_yexp(\Sigma_{i=1}^nw_if_i(x, y))$。</p>
+<a id="more"></a>
+<p>为解决上述对数似然函数极大化的问题，一种显而易见的方法是，令 $\nabla_w\mathcal{L}(w)=0$。但是，考虑到 $Z_w(x)$ 中的指数项 $exp(\Sigma_1^nw_if_i(x, y))$，含有 $n$ 个变量（$w_1, w_2, …, w_n$）的指数和的形式不易同时优化。因此，提出了这里所述的改进的迭代尺度法（IIS）的思想。</p>
+<p>设最大熵模型的参数 $w$ 的当前值为 $w=(w_1, w_2, …, w_n)$，给予其一个增量 $\delta$，得新的模型参数 $w+\delta=(w_1+\delta_1, w_2+\delta_2, …, w_n+\delta_n)$，这种参数更新过程使得对数似然函数不断增大，最终达到一个极大值，以此完成对最大熵模型的对数似然函数的极大化过程。这就是改进的迭代尺度法的基本思想。</p>
+<p>考虑:</p>
+<p>$$\mathcal{L}(w+\delta)-\mathcal{L}(w)=\Sigma_{x,y}\widetilde{P}(x, y)\Sigma_{i=1}^n\delta_if_i(x, y)-\Sigma_x\widetilde{P}(x)log\frac{Z_{w+\delta}(x)}{Z_w(x)}$$</p>
+<p>根据不等式：$-log\alpha \geq 1-\alpha\;(\alpha &gt; 0)$，有：</p>
+<p>$$\mathcal{L}(w+\delta)-\mathcal{L}(w) \geq \Sigma_{x,y}\widetilde{P}(x, y)\Sigma_{i=1}^n\delta_if_i(x, y)+\Sigma_x\widetilde{P}(x)(1-\frac{Z_{w+\delta}(x)}{Z_w(x)})\\<br>=\Sigma_{x,y}\widetilde{P}(x, y)\Sigma_{i=1}^n\delta_if_i(x, y)+1-\Sigma_x\widetilde{P}(x)\frac{Z_{w+\delta}(x)}{Z_w(x)}$$</p>
+<p>而：</p>
+<p>$$\frac{Z_{w+\delta}(x)}{Z_w(x)}=\frac{\Sigma_yexp[\Sigma_{i=1}^nw_if_i(x, y)+\Sigma_{i=1}^n\delta_if_i(x,y)]}{\Sigma_yexp(\Sigma_{i=1}^nw_if_i(x, y))}\\<br>=\frac{\Sigma_y[exp(\Sigma_{i=1}^nw_if_i(x, y)) \cdot exp(\Sigma_{i=1}^n\delta_if_i(x, y))]}{\Sigma_yexp(\Sigma_{i=1}^nw_if_i(x, y))}\\<br>=\Sigma_yP_w(y|x) \cdot exp(\Sigma_{i=1}^n\delta_if_i(x, y))$$</p>
+<p>故：</p>
+<p>$$\mathcal{L}(w+\delta)-\mathcal{L}(w) \geq \Sigma_{x,y}\widetilde{P}(x, y)\Sigma_{i=1}^n\delta_if_i(x, y)+1-\Sigma_x\widetilde{P}(x)\Sigma_yP_w(y|x)exp(\Sigma_{i=1}^n\delta_if_i(x, y))$$</p>
+<p>记：</p>
+<p>$$A(\delta|w)=\Sigma_{x,y}\widetilde{P}(x, y)\Sigma_{i=1}^n\delta_if_i(x, y)+1-\Sigma_x\widetilde{P}(x)\Sigma_yP_w(y|x)exp(\Sigma_{i=1}^n\delta_if_i(x, y))$$</p>
+<p>$A(\delta|w)$ 为当参数变量取得一个增量时，对数似然函数变化量的一个下界。当该下界增大时，对数似然函数也会随之增大，当该下界取得极大值时，此对数似然函数的变化量也会取得一个较为理想的值，从而达到不断增大最大熵模型的对数似然函数的目的。然而，同上文所述，$A(\delta|w)$ 是一个同时含 $n$ 个变量（$\delta_1, \delta_2, …, \delta_n$）指数和的形式，这 $n$ 个变量不易同时进行优化，故而 $A(\delta|w)$ 的形式还需进行变换，最好变换为方便我们对其中一个分量 $\delta_i$ 进行优化而其他分量 $\delta_j\;(i \neq j)$ 保持不变的形式。在这里，我们根据 Jensen 不等式进行变换。</p>
+<p><strong>Jensen 不等式的定义</strong>&nbsp;&nbsp;&nbsp; 设函数 $\varphi$ 为凸函数，参数 $\alpha_i$ 为权重参数，且 $\Sigma_i\alpha_i=1$，则有：$\varphi(\Sigma_i\alpha_ix_i) \leq \Sigma_i(\alpha_i \varphi(x_i))$。</p>
+<p>为使 $A(\delta|w)$ 满足应用以上 Jensen 不等式的条件，我们引入 $f^*(x, y)=\Sigma_if_i(x, y)$，则有：$\Sigma_{i=1}^n\frac{f_i(x, y)}{f^*(x, y)}=1$，式 $\frac{f_i(x, y)}{f^*(x, y)}$ 相当于 Jensen 不等式中的权重参数 $\alpha_i$。实际上，由于 $f_i(x, y)$ 是一个二值函数，故而 $f^*(x, y)$ 可理解为 $x$ 与 $y$ 所满足的特征约束条件的总个数。综上，我们可将下界 $A(\delta|w)$ 变换为如下形式：</p>
+<p>$$A(\delta|w)=\Sigma_{x,y}\widetilde{P}(x, y)\Sigma_{i=1}^n\delta_if_i(x, y)+1-\Sigma_x\widetilde{P}(x)\Sigma_yP_w(y|x)exp(\Sigma_{i=1}^n\frac{f_i(x, y)}{f^*(x, y)}f^*(x, y)\delta_i)\\<br>\geq \Sigma_{x,y}\widetilde{P}(x, y)\Sigma_{i=1}^n\delta_if_i(x, y)+1-\Sigma_x\widetilde{P}(x)\Sigma_yP_w(y|x)\Sigma_{i=1}^n[\frac{f_i(x, y)}{f^*(x, y)}exp(f^*(x, y)\delta_i)]$$</p>
+<p>若令 $B(\delta|w)=\Sigma_{x,y}\widetilde{P}(x, y)\Sigma_{i=1}^n\delta_if_i(x, y)+1-\Sigma_x\widetilde{P}(x)\Sigma_yP_w(y|x)\Sigma_{i=1}^n[\frac{f_i(x, y)}{f^*(x, y)}exp(f^*(x, y)\delta_i)]$，则有 $\mathcal{L}(w+\delta)-\mathcal{L}(w) \geq B(\delta|w)$。</p>
+<p>此时的 $B(\delta|w)$ 成了满足我们条件的易于优化的形式，针对 $B(\delta|w)$，我们对其中的一个 $\delta_i$ 求偏导并令其为 $0$（这是 $B(\delta|w)$ 取得极大值的必要条件），得：</p>
+<p>$$\frac{\partial B(\delta|w)}{\partial \delta_i}=\Sigma_{x,y}\widetilde{P}(x, y)f_i(x, y)-\Sigma_x\widetilde{P}(x)\Sigma_yP_w(y|x)f_i(x, y)exp(f^*(x, y)\delta_i)=0$$</p>
+<p>即有：</p>
+<p>$$\Sigma_{x,y}\widetilde{P}(x)P_w(y|x)f_i(x, y)exp(f^*(x, y)\delta_i)=\mathbb{E}_{\widetilde{P}}(f_i(x, y))$$</p>
+<p>根据上式求解每一个 $\delta_i\;(i=1, 2, …, n)$，然后将 $w+\delta$ 设为新的 $w$，重复以上过程，直至 $\mathcal{L}(w)$ 收敛，此时最大熵模型的对数似然函数将不再增大，由于此前对数似然函数 $\mathcal{L}(w)$ 一直处于爬升状态，因此收敛时必有 $\delta=0$，将 $\delta=0$ 代入 $B(\delta|w)$ 中可知此式亦为 $0$，因此 $B(\delta|w)$ 与 $\mathcal{L}(w)$ 收敛条件是一致的，当 $\delta=0$ 时，参数 $w$ 将不再变化，$w$ 收敛。</p>
+<p>综上，我们可得改进的迭代尺度法如下：</p>
+<p>输入：特征约束条件 $f_1(x, y), f_2(x, y), …, f_n(x, y)$，经验分布 $\widetilde{P}(x, y)$，模型 $P_w(y|x)$<br>输出：最优参数 $w^*$，最优模型 $P_{w^*}(y|x)$<br>(1) 置初始值 $w_i=0\;(i=1, 2, …, n)$；<br>(2) 按 $i=1, 2, …, n$ 根据以下方程：</p>
+<p>$$\Sigma_{x,y}\widetilde{P}(x)P_w(y|x)f_i(x, y)exp(f^*(x, y)\delta_i)=\mathbb{E}_{\widetilde{P}}(f_i(x, y))$$</p>
+<p>分别求解 $\delta_i$，将 $w_i+\delta_i$ 作为新的 $w_i$；<br>(3) 若 $w_i$ 不收敛，则返回步骤（2），否则，令此时 $w$ 为最优值 $w^*$，代入 $P_w(y|x)$ 得最优模型 $P_{w^*}(y|x)$。</p>
+<p>以上算法的关键是步骤（2）中求解方程的过程，若 $f^*(x, y)$ 是一个恒定的常数，即它与任何具体的 $x, y$ 无关，设此时 $f^*(x, y)=M$，则：</p>
+<p>$$\delta_i=\frac{1}{M}log\frac{\mathbb{E}_{\widetilde{P}}(f_i(x, y))}{\mathbb{E}_P(f_i(x, y))}$$</p>
+<p>但是若 $f^*(x, y)$ 不是一个恒定的常数，（2）中方程的求解就需要用到 <a href="http://abnerwang.github.io/2019/08/16/2019/08-16-newton-method/" target="_blank" rel="noopener">牛顿法</a>，设 $g(\delta_i)=\Sigma_{x,y}\widetilde{P}(x)P_w(y|x)f_i(x, y)exp(f^*(x, y)\delta_i)-\mathbb{E}_{\widetilde{P}}(f_i(x, y))$，运用牛顿法可以通过迭代求出此函数的零点，即得（2）中方程的解，这里不再赘述了。</p>
+<h3 id="拟牛顿法"><a href="#拟牛顿法" class="headerlink" title="拟牛顿法"></a>拟牛顿法</h3><p>这里的拟牛顿法过程可参见 <a href="http://abnerwang.github.io/2019/08/16/2019/08-16-newton-method/" target="_blank" rel="noopener">牛顿法与拟牛顿法</a>，很简单，这里就不过多赘述了。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2019/08/20/2019/08-20-max_entropy_model/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+var disqus_identifier = '2019/08/31/2019/08-31-max_entropy_solver/';
+var disqus_title = '最大熵模型的求解';
+var disqus_url = 'http://blog.keeplearning.group/2019/08/31/2019/08-31-max_entropy_solver/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//abnerwang.disqus.com/count.js" async></script><div class="copyright"><p>© 2014 - 2019 <a href="http://blog.keeplearning.group">David Wang</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+tex2jax: { inlineMath: [ ["$", "$"], ["\\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+messageStyle: "none"
+});
+</script></body></html>

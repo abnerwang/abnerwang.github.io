@@ -19,7 +19,7 @@
 <p>由于 $H_k^{-1}$ 正定，由矩阵正定的定义可得 ${g_k}^T {H_k}^{-1}g_k &gt; 0$，而步长因子 $\lambda_k &gt; 0$，因此，$f(x^{(k+1)}) &lt; f(x^{(k)})$，所以 Hessian 矩阵 $H_k$ 正定保证了牛顿法的搜索方向始终是目标函数的下降方向。</p>
 <p>由以上过程可知，牛顿法在进行数值更新的时候，每次都要计算 Hessian 矩阵的逆 $H_k^{-1}$。这种计算是很复杂的。由此我们考虑是否可以用某个矩阵来代替这里的 Hessian 矩阵 $H_k$ 或者 $H_k^{-1}$，基于这种思想发展出了后来称之为拟牛顿法的优化方法。</p>
 <h3 id="拟牛顿法"><a href="#拟牛顿法" class="headerlink" title="拟牛顿法"></a>拟牛顿法</h3><p>我们分别考虑用矩阵 $G_k$ 来近似矩阵 $H_k^{-1}$，用矩阵 $B_k$ 来近似矩阵 $H_k$，分别得到 DFP 算法和 BFGS 算法。</p>
-<h4 id="DFP-Davidon-Fletcher-Powell-算法"><a href="#DFP-Davidon-Fletcher-Powell-算法" class="headerlink" title="DFP(Davidon-Fletcher-Powell) 算法"></a>DFP(Davidon-Fletcher-Powell) 算法</h4><p>用矩阵 $G_k$ 来近似矩阵 $H_k^{-1}$，则由原始牛顿法的迭代过程可知，此时 $x^{(k+1)}=x^{(k)}-G_kg_k$，在不满足迭代终止条件的时候，为了继续得到 $x^{(k+2)}$ 使得迭代过程继续下去，那么接下来的一个问题是 $x=x^{(k+1)}$ 时 $G_{k+1}$ 是多少呢？不妨对目标函数 $f(x)$ 在 $x=^{(k+1)}$ 处做二阶泰勒展开，得：  </p>
+<h4 id="DFP-Davidon-Fletcher-Powell-算法"><a href="#DFP-Davidon-Fletcher-Powell-算法" class="headerlink" title="DFP(Davidon-Fletcher-Powell) 算法"></a>DFP(Davidon-Fletcher-Powell) 算法</h4><p>用矩阵 $G_k$ 来近似矩阵 $H_k^{-1}$，则由原始牛顿法的迭代过程可知，此时 $x^{(k+1)}=x^{(k)}-\lambda_kG_kg_k$，在不满足迭代终止条件的时候，为了继续得到 $x^{(k+2)}$ 使得迭代过程继续下去，那么接下来的一个问题是 $x=x^{(k+1)}$ 时 $G_{k+1}$ 是多少呢？不妨对目标函数 $f(x)$ 在 $x=x^{(k+1)}$ 处做二阶泰勒展开，得：  </p>
 <p>$$f(x)=f(x^{(k+1)})+g_{k+1}^T(x-x^{(k+1)})+\frac{1}{2}(x-x^{(k+1)})^TH_{k+1}(x-x^{(k+1)})$$</p>
 <p>上式两边分别对 $x$ 求梯度，得：</p>
 <p>$$\nabla_xf(x)=g_{k+1}+H_{k+1}(x-x^{(k+1)})$$</p>
@@ -59,7 +59,7 @@
 <p>若将 <strong>DFP 算法</strong> 中关于 $G_{k+1}$ 的迭代公式得到的 $G_{k+1}$ 记为 $G^{DFP}$，以上 <strong>BFGS 算法</strong> 得到的 $G_{k+1}$ 记为 $G^{BFGS}$，它们都满足拟牛顿条件，故而它们的线性组合：</p>
 <p>$$G_{k+1}=\alpha G^{DFP}+(1-\alpha)G^{BFGS} (0\leq\alpha\leq1)$$</p>
 <p>也满足拟牛顿条件，并且是正定的。这样便可以得到一类拟牛顿法，称之为 <strong>Broyden 类算法</strong>。</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2019/08/19/2019/08-19-lagrange_duality/" class="prev">上一篇</a><a href="/2019/06/19/2019/06-14-naive-bayes/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
+</div></article></div></main><footer><div class="paginator"><a href="/2019/08/19/2019/08-19-lagrange_duality/" class="prev">PREV</a><a href="/2019/06/19/2019/06-14-naive-bayes/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'abnerwang';
 var disqus_identifier = '2019/08/16/2019/08-16-newton-method/';
 var disqus_title = '牛顿法与拟牛顿法';
 var disqus_url = 'http://blog.keeplearning.group/2019/08/16/2019/08-16-newton-method/';
